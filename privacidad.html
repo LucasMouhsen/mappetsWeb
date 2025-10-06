@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Pol&iacute;tica de privacidad</title>
+    <meta name="description" content="Conoce c&oacute;mo Mappets protege y gestiona tu informaci&oacute;n personal.">
+    <style>
+        :root {
+            --background: #f3f3f3;
+            --surface: #ffffff;
+            --surface-soft: #fbfbfb;
+            --text-primary: #222222;
+            --text-muted: #7d7d7d;
+            --accent: #06d6a0;
+            --accent-dark: #50c878;
+            --divider: rgba(34, 34, 34, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text-primary);
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .layout {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .nav-link:focus,
+        .nav-link:hover,
+        .nav-link[aria-current="page"] {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        main {
+            padding: 3.5rem 1.25rem 4rem;
+        }
+
+        .hero {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .hero small {
+            display: block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hero h1 {
+            margin: 0 0 1.25rem;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 640px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .section {
+            max-width: 960px;
+            margin: 0 auto 2.75rem;
+            background: var(--surface);
+            padding: 2.75rem;
+            border-radius: 26px;
+            box-shadow: 0 22px 44px rgba(18, 18, 18, 0.05);
+        }
+
+        .section h2 {
+            margin: 0 0 1.25rem;
+            font-size: 1.7rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section p {
+            margin: 0 0 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .section ul,
+        .section ol {
+            margin: 0 0 1.1rem 1.25rem;
+            color: var(--text-muted);
+            padding-left: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.65rem;
+        }
+
+        .section li:last-child {
+            margin-bottom: 0;
+        }
+
+        .muted {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+        }
+
+        .card-inline {
+            display: grid;
+            gap: 1.1rem;
+            background: var(--surface-soft);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        footer {
+            background: var(--background);
+            border-top: 1px solid var(--divider);
+        }
+
+        footer .layout {
+            flex-wrap: wrap;
+            row-gap: 0.75rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        footer a:focus,
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 720px) {
+            .layout {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero,
+            .section {
+                padding: 2.4rem 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true">M</span>
+                <span class="brand-name">Mappets</span>
+            </div>
+            <nav aria-label="Men&uacute; principal">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" aria-current="page" href="privacidad.html">Pol&iacute;ticas de privacidad</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <small>Protecci&oacute;n de datos</small>
+            <h1>Pol&iacute;tica de privacidad de Mappets</h1>
+            <p>En esta p&aacute;gina detallamos qu&eacute; datos personales utiliza la aplicaci&oacute;n, con qu&eacute; finalidad y c&oacute;mo pod&eacute;s ejercer tus derechos.</p>
+        </section>
+        <section class="section" aria-labelledby="resumen">
+            <h2 id="resumen">Resumen clave</h2>
+            <ul>
+                <li>Usamos tus datos para crear tu cuenta, publicar mascotas, habilitar los chats y mostrar mapas colaborativos.</li>
+                <li>Las fotos, datos de las mascotas y ubicaciones aproximadas que cargues se comparten con la comunidad de Mappets para facilitar los reencuentros.</li>
+                <li>Guardamos tu sesi&oacute;n y el avance de los tutoriales de forma local en tu dispositivo (AsyncStorage).</li>
+                <li>Solicitamos permisos para acceder a la galer&iacute;a, la c&aacute;mara, la ubicaci&oacute;n y las notificaciones cuando la funcionalidad lo requiere.</li>
+                <li>Pod&eacute;s pedir acceso, rectificaci&oacute;n o eliminaci&oacute;n de tus datos escribiendo a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</li>
+            </ul>
+        </section>
+        <section class="section" id="responsable" aria-labelledby="responsable-titulo">
+            <h2 id="responsable-titulo">Responsable del tratamiento</h2>
+            <p>Mappets App (&laquo;Mappets&raquo;) es la responsable de los datos tratados a trav&eacute;s de la aplicaci&oacute;n m&oacute;vil y sus sitios asociados.</p>
+            <div class="card-inline">
+                <p class="muted"><strong>Correo de contacto:</strong> <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a></p>
+                <p class="muted"><strong>Domicilio:</strong> Avenida Comunidad 123, Ciudad Digital.</p>
+            </div>
+        </section>
+        <section class="section" id="datos" aria-labelledby="datos-titulo">
+            <h2 id="datos-titulo">Datos que recopilamos</h2>
+            <p>Tratamos la informaci&oacute;n necesaria para prestar los servicios de Mappets:</p>
+            <ul>
+                <li><strong>Datos de cuenta:</strong> nombre, apellido, correo electr&oacute;nico, contrase&ntilde;a cifrada en nuestros servidores y foto de perfil opcional. Guardamos tambi&eacute;n los c&oacute;digos de verificaci&oacute;n que se env&iacute;an para validar el correo.</li>
+                <li><strong>Credenciales y preferencias locales:</strong> el token de acceso y el estado de los tutoriales se almacenan en tu dispositivo mediante AsyncStorage para mantener tu sesi&oacute;n iniciada.</li>
+                <li><strong>Publicaciones de mascotas:</strong> nombre, especie, raza, fecha de nacimiento, peso, color, notas, estado (perdida, encontrada, adopci&oacute;n, tr&aacute;nsito), fotos y cualquier otro campo opcional que completes.</li>
+                <li><strong>Ubicaci&oacute;n aproximada:</strong> coordenadas, provincia y ciudad asociadas a una mascota perdida. El sistema intenta geocodificar la direcci&oacute;n dentro de Argentina cuando otorg&aacute;s permiso de ubicaci&oacute;n.</li>
+                <li><strong>Comunicaciones dentro de la app:</strong> mensajes de chat entre usuarios y datos de la conversaci&oacute;n (identificador del chat, participantes, indicadores de lectura).</li>
+                <li><strong>Notificaciones:</strong> datos necesarios para enviar recordatorios y avisos (por ejemplo, identificador del chat y nombre de la mascota vinculada a la notificaci&oacute;n).</li>
+                <li><strong>Encuestas y formularios:</strong> respuestas que env&iacute;es sobre el cierre de una publicaci&oacute;n y comentarios que dejes en dichos formularios.</li>
+                <li><strong>Registros t&eacute;cnicos:</strong> informaci&oacute;n de diagn&oacute;stico limitada (errores y eventos) utilizada para detectar incidencias y mejorar la estabilidad.</li>
+            </ul>
+        </section>
+        <section class="section" id="permisos" aria-labelledby="permisos-titulo">
+            <h2 id="permisos-titulo">Permisos del dispositivo</h2>
+            <p>La app te pedir&aacute; autorizar ciertos accesos para ofrecer sus funciones:</p>
+            <ul>
+                <li><strong>Galer&iacute;a y c&aacute;mara:</strong> para subir o actualizar fotos de tu perfil y de tus mascotas (expo-image-picker e ImageManipulator).</li>
+                <li><strong>Ubicaci&oacute;n:</strong> para sugerir la &uacute;ltima ubicaci&oacute;n conocida en el mapa y validar que la alerta se publique dentro de Argentina (expo-location).</li>
+                <li><strong>Notificaciones push:</strong> para avisarte sobre nuevos mensajes, publicaciones y procesos completados (expo-notifications).</li>
+            </ul>
+            <p>Pod&eacute;s revocar estos permisos desde los ajustes de tu dispositivo; algunas funcionalidades podr&iacute;an dejar de estar disponibles.</p>
+        </section>
+        <section class="section" id="uso" aria-labelledby="uso-titulo">
+            <h2 id="uso-titulo">Para qu&eacute; usamos la informaci&oacute;n</h2>
+            <ol>
+                <li>Crear y mantener tu cuenta, gestionar la autenticaci&oacute;n y permitirte editar tus datos.</li>
+                <li>Publicar y administrar fichas de mascotas, incluyendo fotograf&iacute;as y ubicaciones aproximadas.</li>
+                <li>Mostrar mapas y listados colaborativos de mascotas para la comunidad.</li>
+                <li>Facilitar la mensajer&iacute;a entre usuarios y enviar notificaciones relevantes.</li>
+                <li>Verificar correos electr&oacute;nicos y prevenir usos indebidos o fraudes.</li>
+                <li>Responder consultas, brindar soporte y mejorar la calidad del servicio mediante encuestas.</li>
+                <li>Cumplir obligaciones legales o atender requerimientos de autoridades competentes.</li>
+            </ol>
+        </section>
+        <section class="section" id="bases" aria-labelledby="bases-titulo">
+            <h2 id="bases-titulo">Bases legales del tratamiento</h2>
+            <ul>
+                <li><strong>Consentimiento:</strong> cuando otorg&aacute;s permisos del dispositivo, acept&aacute;s recibir notificaciones o complet&aacute;s encuestas.</li>
+                <li><strong>Ejecuci&oacute;n del contrato:</strong> para prestar las funciones principales de la app (registro, publicaciones, chats).</li>
+                <li><strong>Inter&eacute;s leg&iacute;timo:</strong> mantener la seguridad, prevenir abusos y mejorar la plataforma.</li>
+                <li><strong>Obligaci&oacute;n legal:</strong> atender pedidos de autoridades o cumplir normativas aplicables.</li>
+            </ul>
+        </section>
+        <section class="section" id="compartimos" aria-labelledby="compartimos-titulo">
+            <h2 id="compartimos-titulo">Con qui&eacute;n compartimos tus datos</h2>
+            <ul>
+                <li><strong>Comunidad Mappets:</strong> las fichas de mascotas (con fotos y ubicaci&oacute;n aproximada) son visibles para otros usuarios registrados. Los mensajes de chat solo son accesibles para sus participantes.</li>
+                <li><strong>Proveedores tecnol&oacute;gicos:</strong> nuestro backend y servicios de almacenamiento, as&iacute; como Expo, Apple y Google para procesar notificaciones push, mapas y geocodificaci&oacute;n.</li>
+                <li><strong>Servicios de correo:</strong> para el env&iacute;o de c&oacute;digos de verificaci&oacute;n y comunicaciones esenciales.</li>
+                <li><strong>Autoridades competentes:</strong> cuando exista una obligaci&oacute;n legal o una solicitud v&aacute;lida.</li>
+            </ul>
+            <p>No vendemos tus datos personales a terceros ni mostramos publicidad basada en perfiles.</p>
+        </section>
+        <section class="section" id="transferencias" aria-labelledby="transferencias-titulo">
+            <h2 id="transferencias-titulo">Transferencias internacionales</h2>
+            <p>Podemos alojar la informaci&oacute;n en proveedores de infraestructura ubicados fuera de tu pa&iacute;s. En esos casos aplicamos cl&aacute;usulas contractuales y medidas que garantizan un nivel de protecci&oacute;n equivalente al exigido por la normativa vigente.</p>
+        </section>
+        <section class="section" id="conservacion" aria-labelledby="conservacion-titulo">
+            <h2 id="conservacion-titulo">Plazos de conservaci&oacute;n</h2>
+            <ul>
+                <li>Mantenemos los datos de tu cuenta mientras permanezca activa o hasta que solicites su eliminaci&oacute;n.</li>
+                <li>Las publicaciones y chats se conservan mientras sean necesarios para los fines descritos o hasta que las borres desde la app.</li>
+                <li>Las copias locales (token y tutoriales) se eliminan al cerrar sesi&oacute;n o al borrar los datos de la app en tu dispositivo.</li>
+                <li>Podemos conservar informaci&oacute;n anonimizada o agregada para fines estad&iacute;sticos.</li>
+            </ul>
+        </section>
+        <section class="section" id="derechos" aria-labelledby="derechos-titulo">
+            <h2 id="derechos-titulo">Tus derechos</h2>
+            <p>Pod&eacute;s ejercer los derechos de acceso, rectificaci&oacute;n, actualizaci&oacute;n, portabilidad, oposici&oacute;n, supresi&oacute;n y limitaci&oacute;n del tratamiento.</p>
+            <div class="card-inline">
+                <p class="muted">Envianos tu solicitud a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a> indicando tu nombre completo, el correo registrado y el derecho que dese&aacute;s ejercer. Responderemos en un plazo m&aacute;ximo de 30 d&iacute;as.</p>
+            </div>
+        </section>
+        <section class="section" id="seguridad" aria-labelledby="seguridad-titulo">
+            <h2 id="seguridad-titulo">Medidas de seguridad</h2>
+            <p>Aplicamos controles t&eacute;cnicos y organizativos para proteger la informaci&oacute;n: acceso restringido mediante tokens, comunicaciones cifradas (HTTPS) y validaciones adicionales para operaciones sensibles. Aunque trabajamos para salvaguardar tus datos, ninguna plataforma es completamente invulnerable.</p>
+        </section>
+        <section class="section" id="menores" aria-labelledby="menores-titulo">
+            <h2 id="menores-titulo">Menores de edad</h2>
+            <p>Mappets est&aacute; dirigida a personas mayores de 14 a&ntilde;os. Si tenemos constancia de que hemos recibido datos de menores sin el consentimiento correspondiente, procederemos a eliminarlos.</p>
+        </section>
+        <section class="section" id="cambios" aria-labelledby="cambios-titulo">
+            <h2 id="cambios-titulo">Actualizaciones de la pol&iacute;tica</h2>
+            <p>Podemos modificar esta pol&iacute;tica para reflejar mejoras de la app o cambios regulatorios. Publicaremos la versi&oacute;n vigente en esta p&aacute;gina indicando la fecha de actualizaci&oacute;n.</p>
+            <p class="muted">Fecha de entrada en vigor: 15 de octubre de 2025.</p>
+        </section>
+        <section class="section" id="contacto" aria-labelledby="contacto-titulo">
+            <h2 id="contacto-titulo">Contacto</h2>
+            <p>Si ten&eacute;s dudas o necesit&aacute;s m&aacute;s informaci&oacute;n sobre la protecci&oacute;n de tus datos, escribinos a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>&copy; 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="donaciones.html">Donaciones</a>
+        </div>
+    </footer>
+</body>
+</html>

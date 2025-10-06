@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Comunidad para mascotas</title>
+    <meta name="description" content="Mappets es la app que conecta a familias y rescatistas para proteger y reencontrar mascotas.">
+    <style>
+        :root {
+            --background: #f3f3f3;
+            --surface: #ffffff;
+            --text-primary: #222222;
+            --text-muted: #7d7d7d;
+            --accent: #06d6a0;
+            --accent-dark: #50c878;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text-primary);
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--background);
+            border-bottom: 1px solid rgba(34, 34, 34, 0.06);
+        }
+
+        .layout {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding-bottom: 0.2rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .nav-link:focus,
+        .nav-link:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        main {
+            padding: 3.5rem 1.25rem 4rem;
+        }
+
+        .hero {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .kicker {
+            margin: 0 0 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        h1 {
+            margin: 0 0 1rem;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .intro {
+            margin: 0;
+            max-width: 640px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .actions {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.9rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            box-shadow: 0 14px 30px rgba(6, 214, 160, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:focus,
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(6, 214, 160, 0.32);
+        }
+
+        .text-link {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .text-link:focus,
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        .highlights {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .highlights article {
+            background: var(--surface);
+            padding: 1.85rem;
+            border-radius: 22px;
+            box-shadow: 0 18px 36px rgba(18, 18, 18, 0.05);
+        }
+
+        .highlights h2 {
+            margin: 0 0 0.75rem;
+            font-size: 1.3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .highlights p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .support {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(6, 214, 160, 0.12), rgba(80, 200, 120, 0.2));
+            padding: 2.75rem;
+            border-radius: 28px;
+            text-align: center;
+        }
+
+        .card h2 {
+            margin: 0 0 1rem;
+            font-size: 1.7rem;
+        }
+
+        .card p {
+            margin: 0 0 1.5rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            background: var(--background);
+            border-top: 1px solid rgba(34, 34, 34, 0.06);
+        }
+
+        footer .layout {
+            flex-wrap: wrap;
+            row-gap: 0.75rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        footer a:focus,
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 720px) {
+            .layout {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero {
+                padding: 2.5rem 2rem;
+            }
+
+            .actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 2.5rem 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true">M</span>
+                <span class="brand-name">Mappets</span>
+            </div>
+            <nav aria-label="Menú principal">
+                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Políticas de privacidad</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <p class="kicker">Comunidad para mascotas y familias</p>
+            <h1>Encuentra, protege y conecta con quienes aman a los animales.</h1>
+            <p class="intro">Mappets te ayuda a compartir alertas de mascotas perdidas, coordinar búsquedas en tiempo real y apoyar a rescatistas con herramientas simples y colaborativas.</p>
+            <div class="actions">
+                <a class="button" href="donaciones.html">Apoyar con una donación</a>
+                <a class="text-link" href="privacidad.html">Consulta nuestras políticas de privacidad</a>
+            </div>
+        </section>
+        <section class="highlights" aria-label="Funciones principales de Mappets">
+            <article>
+                <h2>Mapas en tiempo real</h2>
+                <p>Sigue reportes recientes y organiza rutas seguras para reencontrar mascotas con sus familias.</p>
+            </article>
+            <article>
+                <h2>Red de cuidadores</h2>
+                <p>Conecta con rescatistas, hogares temporales y voluntarios dispuestos a ayudar.</p>
+            </article>
+            <article>
+                <h2>Herramientas colaborativas</h2>
+                <p>Comparte actualizaciones, fotos y mensajes que mantienen informada a toda la comunidad.</p>
+            </article>
+        </section>
+        <section class="support" aria-label="Apoyo a Mappets">
+            <div class="card">
+                <h2>Tu aporte transforma historias</h2>
+                <p>Con cada donación fortalecemos nuestra plataforma, ampliamos la red de apoyo y aceleramos los reencuentros.</p>
+                <a class="button" href="donaciones.html">Ir a donaciones</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="privacidad.html">Políticas de privacidad</a>
+        </div>
+    </footer>
+</body>
+</html>

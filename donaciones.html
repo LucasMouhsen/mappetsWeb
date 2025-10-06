@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Donaciones</title>
+    <meta name="description" content="Conoce c&oacute;mo apoyar a Mappets y ayudar a que m&aacute;s mascotas regresen a casa.">
+    <style>
+        :root {
+            --background: #f3f3f3;
+            --surface: #ffffff;
+            --surface-soft: #fbfbfb;
+            --text-primary: #222222;
+            --text-muted: #7d7d7d;
+            --accent: #06d6a0;
+            --accent-dark: #50c878;
+            --divider: rgba(34, 34, 34, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text-primary);
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .layout {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .nav-link:focus,
+        .nav-link:hover,
+        .nav-link[aria-current="page"] {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        main {
+            padding: 3.5rem 1.25rem 4rem;
+        }
+
+        .hero {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .hero small {
+            display: block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hero h1 {
+            margin: 0 0 1.25rem;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 620px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .hero-actions {
+            margin-top: 2.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.9rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            box-shadow: 0 14px 30px rgba(6, 214, 160, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:focus,
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(6, 214, 160, 0.32);
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid rgba(6, 214, 160, 0.6);
+            box-shadow: none;
+        }
+
+        .button.secondary:focus,
+        .button.secondary:hover {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            transform: translateY(-2px);
+        }
+
+        .text-link {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .text-link:focus,
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-grid {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            display: grid;
+            gap: 1.75rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 2.25rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 38px rgba(18, 18, 18, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .card ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .card li {
+            margin-bottom: 0.55rem;
+        }
+
+        .card li:last-child {
+            margin-bottom: 0;
+        }
+
+        .handle {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+        }
+
+        .card-actions {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+        }
+
+        .note {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface-soft);
+            padding: 1.75rem;
+            border-radius: 22px;
+            border: 1px solid var(--divider);
+        }
+
+        .muted {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        footer {
+            background: var(--background);
+            border-top: 1px solid var(--divider);
+        }
+
+        footer .layout {
+            flex-wrap: wrap;
+            row-gap: 0.75rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        footer a:focus,
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 720px) {
+            .layout {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero {
+                padding: 2.5rem 2rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 2.1rem 1.9rem;
+            }
+
+            .note {
+                padding: 1.55rem 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true">M</span>
+                <span class="brand-name">Mappets</span>
+            </div>
+            <nav aria-label="Men&uacute; principal">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" aria-current="page" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Pol&iacute;ticas de privacidad</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <small>Apoyo a la comunidad</small>
+            <h1>Con&oacute;cenos</h1>
+            <p>Seguinos para conocernos y ayudarnos a seguir creciendo.</p>
+            <div class="hero-actions">
+                <a class="button" href="https://instagram.com/mappets_" target="_blank" rel="noopener noreferrer">Seguir en Instagram</a>
+                <a class="text-link" href="mailto:lucasmouhsen@mappets.com.ar">Escribir al equipo</a>
+            </div>
+        </section>
+        <section class="info-grid" aria-label="Apoyo a Mappets">
+            <article class="card">
+                <h2>Instagram</h2>
+                <p>Encontranos como:</p>
+                <p class="handle">@mappets_</p>
+                <p>Compart&iacute; nuestras publicaciones y etiquet&aacute; a quienes puedan ayudar en cada alerta.</p>
+                <div class="card-actions">
+                    <a class="button secondary" href="https://instagram.com/mappets_" target="_blank" rel="noopener noreferrer">Abrir Instagram</a>
+                </div>
+            </article>
+            <article class="card">
+                <h2>Sobre Mappets</h2>
+                <p>Trabajamos para que m&aacute;s mascotas vuelvan a casa. Tu apoyo siguiendo y compartiendo nos ayuda a llegar a m&aacute;s personas.</p>
+                <p>Sumate comentando, guardando y difundiendo las historias de rescate de nuestra comunidad.</p>
+            </article>
+            <article class="card">
+                <h2>Otras formas de apoyar</h2>
+                <ul>
+                    <li>Invit&aacute; a cuidadores y rescatistas a unirse a la app.</li>
+                    <li>Report&aacute; cuando veas una mascota perdida para activar la red.</li>
+                    <li>Acerc&aacute; datos de organizaciones amigas que quieran colaborar.</li>
+                </ul>
+            </article>
+        </section>
+        <section class="note">
+            <p class="muted">iOS y Android: se abrir&aacute; la app de Instagram si est&aacute; instalada; si no, se usar&aacute; la versi&oacute;n web.</p>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>&copy; 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="privacidad.html">Pol&iacute;ticas de privacidad</a>
+        </div>
+    </footer>
+</body>
+</html>
