@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Solicitud de eliminación de datos</title>
+    <meta name="description" content="Solicita la eliminación de tus datos personales registrados en Mappets.">
+    <style>
+        :root {
+            --background: #ffffff;
+            --surface: #f3f3f3;
+            --surface-soft: #fbfbfb;
+            --text-primary: #222222;
+            --text-muted: #7d7d7d;
+            --accent: #06d6a0;
+            --accent-dark: #50c878;
+            --divider: rgba(34, 34, 34, 0.08);
+            --error: #d64545;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text-primary);
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .layout {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .brand-logo {
+            display: block;
+            height: 72px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .nav-link:focus,
+        .nav-link:hover,
+        .nav-link[aria-current="page"] {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        main {
+            padding: 3.5rem 1.25rem 4rem;
+        }
+
+        .hero {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .hero small {
+            display: block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hero h1 {
+            margin: 0 0 1.25rem;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 640px;
+            color: var(--text-muted);
+        }
+
+        .request-card {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .request-card h2 {
+            margin: 0 0 1rem;
+            font-size: 1.65rem;
+        }
+
+        .request-card p {
+            margin: 0 0 2rem;
+            color: var(--text-muted);
+        }
+
+        .request-form {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 420px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .input-group input {
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            border: 1px solid var(--divider);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(6, 214, 160, 0.16);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.4rem;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:focus,
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 30px rgba(6, 214, 160, 0.25);
+        }
+
+        .button[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .feedback {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--accent-dark);
+        }
+
+        .feedback.error {
+            color: var(--error);
+        }
+
+        .note {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--surface-soft);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: var(--background);
+            border-top: 1px solid var(--divider);
+        }
+
+        footer .layout {
+            flex-wrap: wrap;
+            row-gap: 0.75rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        footer a:focus,
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 720px) {
+            .layout {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero,
+            .request-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .request-form {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div class="brand">
+                <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
+            </div>
+            <nav aria-label="Menú principal">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Políticas de privacidad</a>
+                <a class="nav-link" aria-current="page" href="solicitud-eliminación.html">Eliminar datos</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <small>Protección de datos</small>
+            <h1>Solicitá la eliminación de tu información personal</h1>
+            <p>Completá tu correo electrónico para que podamos identificar tu cuenta y confirmar la eliminación dentro de un plazo máximo de 30 días.</p>
+        </section>
+        <section class="request-card" aria-labelledby="solicitud-titulo">
+            <h2 id="solicitud-titulo">Formulario de solicitud</h2>
+            <p>Al enviar este formulario generamos un mensaje para el equipo de soporte de Mappets con tu pedido. Vas a poder revisar y enviar el correo desde tu cliente de email habitual.</p>
+            <form class="request-form" id="deletion-form" novalidate>
+                <div class="input-group">
+                    <label for="email">Correo registrado</label>
+                    <input id="email" name="email" type="email" placeholder="nombre@ejemplo.com" required>
+                </div>
+                <button class="button" type="submit">Enviar solicitud</button>
+                <p class="feedback" id="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+            <div class="note">
+                <p>Si el correo que registres no coincide con una cuenta activa, te pediremos información adicional para acreditar tu identidad antes de procesar la eliminación.</p>
+                <p class="muted">El envío se procesa mediante FormSubmit y recibirás un correo de confirmación para completar el pedido.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="privacidad.html">Políticas de privacidad</a>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('deletion-form');
+            const emailInput = document.getElementById('email');
+            const feedback = document.getElementById('form-feedback');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const endpoint = 'https://formsubmit.co/ajax/lucasmouhsen@mappets.com.ar';
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                feedback.textContent = '';
+                feedback.classList.remove('error');
+
+                const emailValue = emailInput.value.trim();
+
+                if (!emailValue) {
+                    feedback.textContent = 'Ingresá tu correo electrónico para continuar.';
+                    feedback.classList.add('error');
+                    emailInput.focus();
+                    return;
+                }
+
+                if (!emailInput.checkValidity()) {
+                    feedback.textContent = 'Revisá el formato del correo ingresado.';
+                    feedback.classList.add('error');
+                    emailInput.focus();
+                    return;
+                }
+
+                submitButton.disabled = true;
+                const originalLabel = submitButton.textContent;
+                submitButton.textContent = 'Enviando...';
+
+                const payload = {
+                    _subject: 'Solicitud de eliminación de datos personales',
+                    email: emailValue,
+                    message: [
+                        'Hola equipo Mappets,',
+                        '',
+                        'Solicito la eliminación definitiva de mis datos personales asociados a este correo.',
+                        '',
+                        'Por favor, confirmen cuando el proceso esté completo.',
+                        '',
+                        'Gracias.'
+                    ].join('')
+                };
+
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Respuesta no válida');
+                    }
+
+                    feedback.textContent = 'Solicitud enviada. Te vamos a responder a la brevedad.';
+                    form.reset();
+                    emailInput.blur();
+                } catch (error) {
+                    feedback.textContent = 'No pudimos enviar la solicitud. Intentá de nuevo o escribinos a lucasmouhsen@mappets.com.ar.';
+                    feedback.classList.add('error');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalLabel;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
