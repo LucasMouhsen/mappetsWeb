@@ -12,8 +12,12 @@
             --surface-soft: #fbfbfb;
             --text-primary: #222222;
             --text-muted: #7d7d7d;
-            --accent: #06d6a0;
-            --accent-dark: #50c878;
+            --accent: #bb7c23;
+            --accent-dark: #f4d06f;
+            --header-surface: #f3f3f3;
+            --nav-active: #212529;
+            --nav-inactive: #7d7d7d;
+            --header-title: #222222;
             --divider: rgba(34, 34, 34, 0.08);
         }
 
@@ -27,7 +31,7 @@
             line-height: 1.6;
         }
 
-        header { background: var(--background); border-bottom: 1px solid var(--divider); }
+        header { background: var(--header-surface); border-bottom: 1px solid var(--divider); }
 
         .layout {
             max-width: 960px;
@@ -38,16 +42,19 @@
             justify-content: space-between;
             gap: 1.5rem;
         }
-
         .brand {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--header-title);
         }
 
-        .brand-logo { display: block; height: 100px; width: auto; }
+        .brand-logo {
+            display: block;
+            height: 100px;
+            width: auto;
+        }
 
         nav {
             display: flex;
@@ -58,7 +65,7 @@
         }
 
         .nav-link {
-            color: var(--text-primary);
+            color: var(--nav-inactive);
             font-weight: 500;
             text-decoration: none;
             padding-bottom: 0.25rem;
@@ -69,8 +76,8 @@
         .nav-link:hover,
         .nav-link:focus,
         .nav-link[aria-current="page"] {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
+            color: var(--nav-active);
+            border-bottom-color: var(--nav-active);
         }
 
         .nav-toggle {
@@ -80,7 +87,7 @@
             padding: 0.55rem 0.75rem;
             border-radius: 12px;
             border: 1px solid var(--divider);
-            background: #ffffff;
+            background: var(--header-surface);
             color: var(--text-primary);
             font-weight: 600;
             cursor: pointer;

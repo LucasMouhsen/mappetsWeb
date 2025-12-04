@@ -14,8 +14,12 @@
             --surface-soft: #fbfbfb;
             --text-primary: #222222;
             --text-muted: #7d7d7d;
-            --accent: #06d6a0;
-            --accent-dark: #50c878;
+            --accent: #bb7c23;
+            --accent-dark: #f4d06f;
+            --header-surface: #f3f3f3;
+            --nav-active: #212529;
+            --nav-inactive: #7d7d7d;
+            --header-title: #222222;
             --divider: rgba(34, 34, 34, 0.08);
         }
 
@@ -47,12 +51,25 @@
         }
 
         .brand {
+
+
             display: flex;
+
+
             align-items: center;
+
+
             gap: 0.75rem;
+
+
             font-weight: 600;
-            color: var(--text-primary);
+
+
+            color: var(--header-title);
+
+
         }
+
 
         .brand-mark {
             display: inline-flex;
@@ -69,9 +86,17 @@
         }
 
         .brand-logo {
+
+
             display: block;
+
+
             height: 100px;
+
+
             width: auto;
+
+
         }
 
         nav {
@@ -83,7 +108,7 @@
         }
 
         .nav-link {
-            color: var(--text-primary);
+            color: var(--nav-inactive);
             font-weight: 500;
             text-decoration: none;
             padding-bottom: 0.25rem;
@@ -94,8 +119,8 @@
         .nav-link:focus,
         .nav-link:hover,
         .nav-link[aria-current="page"] {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
+            color: var(--nav-active);
+            border-bottom-color: var(--nav-active);
         }
 
         .nav-toggle {
@@ -105,7 +130,7 @@
             padding: 0.55rem 0.75rem;
             border-radius: 12px;
             border: 1px solid var(--divider);
-            background: #ffffff;
+            background: var(--header-surface);
             color: var(--text-primary);
             font-weight: 600;
             cursor: pointer;
@@ -173,20 +198,20 @@
             font-weight: 600;
             letter-spacing: 0.01em;
             text-decoration: none;
-            box-shadow: 0 14px 30px rgba(6, 214, 160, 0.25);
+            box-shadow: 0 14px 30px rgba(187, 124, 35, 0.25);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .button:focus,
         .button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 18px 36px rgba(6, 214, 160, 0.32);
+            box-shadow: 0 18px 36px rgba(187, 124, 35, 0.32);
         }
 
         .button.secondary {
             background: transparent;
             color: var(--accent);
-            border: 1px solid rgba(6, 214, 160, 0.6);
+            border: 1px solid rgba(187, 124, 35, 0.6);
             box-shadow: none;
         }
 
