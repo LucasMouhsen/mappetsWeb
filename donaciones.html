@@ -77,7 +77,9 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            transition: max-height 0.25s ease;
         }
 
         .nav-link {
@@ -94,6 +96,26 @@
         .nav-link[aria-current="page"] {
             color: var(--accent);
             border-bottom-color: var(--accent);
+        }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--divider);
+            background: #ffffff;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .nav-toggle:focus,
+        .nav-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(18, 18, 18, 0.08);
         }
 
         main {
@@ -292,9 +314,21 @@
                 align-items: flex-start;
             }
 
+            .nav-toggle {
+                display: inline-flex;
+            }
+
             nav {
                 width: 100%;
-                justify-content: flex-start;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.85rem;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            nav[data-open="true"] {
+                max-height: 600px;
             }
 
             .hero {
@@ -323,11 +357,15 @@
             <div class="brand">
                 <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
             </div>
-            <nav aria-label="Menú principal">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menú</button>
+            <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
                 <a class="nav-link" aria-current="page" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Política de privacidad</a>
+                <a class="nav-link" href="terminos.html">Términos y condiciones</a>
+                <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
                 <a class="nav-link" href="soporte.html">Soporte</a>
-                <a class="nav-link" href="solicitud-eliminación.html">Eliminar datos</a>
+                <a class="nav-link" href="solicitud-eliminacion.html">Eliminar datos</a>
             </nav>
         </div>
     </header>
@@ -337,7 +375,7 @@
             <h1>Conócenos</h1>
             <p>Seguinos para conocernos y ayudarnos a seguir creciendo.</p>
             <div class="hero-actions">
-                <a class="button" href="https://instagram.com/mappets_" target="_blank" rel="noopener noreferrer">Seguir
+                <a class="button" href="https://instagram.com/mappets" target="_blank" rel="noopener noreferrer">Seguir
                     en Instagram</a>
                 <a class="button secondary" href="https://cafecito.app/mappets" target="_blank"
                     rel="noopener noreferrer">Invitarnos un Cafecito</a>
@@ -348,10 +386,10 @@
             <article class="card">
                 <h2>Instagram</h2>
                 <p>Encontranos como:</p>
-                <p class="handle">@mappets_</p>
+                <p class="handle">@mappets</p>
                 <p>Compartí nuestras publicaciones y etiquetá a quienes puedan ayudar en cada alerta.</p>
                 <div class="card-actions">
-                    <a class="button secondary" href="https://instagram.com/mappets_" target="_blank"
+                    <a class="button secondary" href="https://instagram.com/mappets" target="_blank"
                         rel="noopener noreferrer">Abrir Instagram</a>
                 </div>
             </article>
@@ -382,6 +420,16 @@
             <a href="privacidad.html">Políticas de privacidad</a>
         </div>
     </footer>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('#main-nav');
+        navToggle?.addEventListener('click', () => {
+            const isOpen = mainNav?.getAttribute('data-open') === 'true';
+            const nextState = (!isOpen).toString();
+            mainNav?.setAttribute('data-open', nextState);
+            navToggle.setAttribute('aria-expanded', nextState);
+        });
+    </script>
 </body>
 
 </html>

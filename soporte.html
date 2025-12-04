@@ -43,13 +43,33 @@
         .brand { display: flex; align-items: center; gap: 0.75rem; font-weight: 600; }
         .brand-logo { display: block; height: 72px; width: auto; }
 
-        nav { display: flex; align-items: center; gap: 1.25rem; }
+        nav { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; transition: max-height 0.25s ease; }
         .nav-link {
             color: var(--text-primary); font-weight: 500; text-decoration: none;
             padding-bottom: 0.25rem; border-bottom: 2px solid transparent;
             transition: color 0.2s ease, border-bottom-color 0.2s ease;
         }
         .nav-link:focus, .nav-link:hover, .nav-link[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--divider);
+            background: #ffffff;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .nav-toggle:focus,
+        .nav-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(18, 18, 18, 0.08);
+        }
 
         main { padding: 3.5rem 1.25rem 4rem; }
 
@@ -118,7 +138,16 @@
 
         @media (max-width: 720px) {
             .layout { flex-direction: column; align-items: flex-start; }
-            nav { width: 100%; justify-content: flex-start; }
+            .nav-toggle { display: inline-flex; }
+            nav {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.85rem;
+                max-height: 0;
+                overflow: hidden;
+            }
+            nav[data-open="true"] { max-height: 600px; }
             .row { grid-template-columns: 1fr; }
             .hero, .request-card { padding: 2rem; }
             .request-form { max-width: 100%; }
@@ -131,10 +160,13 @@
             <div class="brand">
                 <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
             </div>
-            <nav aria-label="Menú principal">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menú</button>
+            <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
                 <a class="nav-link" href="donaciones.html">Donaciones</a>
-                <a class="nav-link" href="privacidad.html">Políticas de privacidad</a>
+                <a class="nav-link" href="privacidad.html">Política de privacidad</a>
+                <a class="nav-link" href="terminos.html">Términos y condiciones</a>
+                <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
                 <a class="nav-link" aria-current="page" href="soporte.html">Soporte</a>
                 <a class="nav-link" href="solicitud-eliminacion.html">Eliminar datos</a>
             </nav>
@@ -247,6 +279,16 @@
             <a href="privacidad.html">Políticas de privacidad</a>
         </div>
     </footer>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('#main-nav');
+        navToggle?.addEventListener('click', () => {
+            const isOpen = mainNav?.getAttribute('data-open') === 'true';
+            const nextState = (!isOpen).toString();
+            mainNav?.setAttribute('data-open', nextState);
+            navToggle.setAttribute('aria-expanded', nextState);
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('support-form');

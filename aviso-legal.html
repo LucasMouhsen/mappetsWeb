@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Aviso Legal</title>
+    <meta name="description" content="Aviso legal de Mappets y datos de contacto del responsable del servicio.">
+    <style>
+        :root {
+            --background: #ffffff;
+            --surface: #dbdbdb;
+            --surface-soft: #fbfbfb;
+            --text-primary: #222222;
+            --text-muted: #7d7d7d;
+            --accent: #06d6a0;
+            --accent-dark: #50c878;
+            --divider: rgba(34, 34, 34, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text-primary);
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .layout {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .brand-logo {
+            display: block;
+            height: 100px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            transition: max-height 0.25s ease;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus,
+        .nav-link[aria-current="page"] {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--divider);
+            background: #ffffff;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .nav-toggle:focus,
+        .nav-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(18, 18, 18, 0.08);
+        }
+
+        main {
+            padding: 3.5rem 1.25rem 4rem;
+        }
+
+        .hero {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .hero small {
+            display: block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hero h1 {
+            margin: 0 0 1.25rem;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 720px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .section {
+            max-width: 960px;
+            margin: 0 auto 2.75rem;
+            background: var(--surface);
+            padding: 2.75rem;
+            border-radius: 26px;
+            box-shadow: 0 22px 44px rgba(18, 18, 18, 0.05);
+        }
+
+        .section h2 {
+            margin: 0 0 1.25rem;
+            font-size: 1.7rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section p {
+            margin: 0 0 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .related {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+
+        .related a,
+        .related span {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .related a:hover,
+        .related a:focus { text-decoration: underline; }
+
+        footer {
+            background: var(--background);
+            border-top: 1px solid var(--divider);
+        }
+
+        footer .layout { flex-wrap: wrap; row-gap: 0.75rem; }
+
+        footer p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        footer a:hover,
+        footer a:focus { text-decoration: underline; }
+
+        @media (max-width: 720px) {
+            .layout { flex-direction: column; align-items: flex-start; }
+            .nav-toggle { display: inline-flex; }
+            nav {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.85rem;
+                max-height: 0;
+                overflow: hidden;
+            }
+            nav[data-open="true"] { max-height: 600px; }
+            .hero, .section { padding: 2.4rem 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div class="brand">
+                <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
+            </div>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menú</button>
+            <nav id="main-nav" aria-label="Menú principal" data-open="false">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Política de privacidad</a>
+                <a class="nav-link" href="terminos.html">Términos y condiciones</a>
+                <a class="nav-link" aria-current="page" href="aviso-legal.html">Aviso legal</a>
+                <a class="nav-link" href="soporte.html">Soporte</a>
+                <a class="nav-link" href="solicitud-eliminacion.html">Eliminar datos</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <small>Legales</small>
+            <h1>Aviso Legal</h1>
+            <p>Este aviso identifica al responsable de Mappets y brinda la información exigida por la normativa aplicable en materia de servicios digitales y protección de datos personales.</p>
+        </section>
+
+        <section class="section" id="titular">
+            <h2>Titular del servicio</h2>
+            <p>Mappets es administrado por Lucas Diaz Mouhsen. Para comunicaciones formales, pedidos de autoridades o solicitudes vinculadas a la protección de datos, escribí a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</p>
+        </section>
+
+        <section class="section" id="propiedad">
+            <h2>Propiedad intelectual</h2>
+            <p>El software, diseños, logotipos, contenidos y demás elementos de la plataforma están protegidos por derechos de propiedad intelectual. Su reproducción, distribución o modificación sin autorización está prohibida.</p>
+        </section>
+
+        <section class="section" id="responsabilidad">
+            <h2>Responsabilidad</h2>
+            <p>El titular vela por la seguridad y disponibilidad del servicio, pero no es responsable por daños derivados de un uso indebido, interrupciones provocadas por terceros o casos de fuerza mayor. Los acuerdos alcanzados entre personas usuarias fuera de la plataforma quedan bajo su exclusiva responsabilidad.</p>
+        </section>
+
+        <section class="section" id="reclamos">
+            <h2>Reclamos y autoridades de control</h2>
+            <p>Si considerás que se vulneraron tus derechos, podés presentar un reclamo ante la Agencia de Acceso a la Información Pública de Argentina o la autoridad de protección de datos que corresponda a tu jurisdicción.</p>
+        </section>
+
+        <section class="section" aria-labelledby="relacionados">
+            <h2 id="relacionados">Documentos relacionados</h2>
+            <div class="related">
+                <a href="terminos.html">Términos y Condiciones</a>
+                <a href="privacidad.html">Política de Privacidad</a>
+                <span>Política de Cookies</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="donaciones.html">Donaciones</a>
+        </div>
+    </footer>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('#main-nav');
+        navToggle?.addEventListener('click', () => {
+            const isOpen = mainNav?.getAttribute('data-open') === 'true';
+            const nextState = (!isOpen).toString();
+            mainNav?.setAttribute('data-open', nextState);
+            navToggle.setAttribute('aria-expanded', nextState);
+        });
+    </script>
+</body>
+</html>

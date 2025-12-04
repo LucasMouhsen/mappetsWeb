@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Términos y Condiciones</title>
+    <meta name="description" content="Lee los Términos y Condiciones de uso de la plataforma Mappets.">
+    <style>
+        :root {
+            --background: #ffffff;
+            --surface: #dbdbdb;
+            --surface-soft: #fbfbfb;
+            --text-primary: #222222;
+            --text-muted: #7d7d7d;
+            --accent: #06d6a0;
+            --accent-dark: #50c878;
+            --divider: rgba(34, 34, 34, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text-primary);
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .layout {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .brand-logo {
+            display: block;
+            height: 100px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            transition: max-height 0.25s ease;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus,
+        .nav-link[aria-current="page"] {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--divider);
+            background: #ffffff;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .nav-toggle:focus,
+        .nav-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(18, 18, 18, 0.08);
+        }
+
+        main {
+            padding: 3.5rem 1.25rem 4rem;
+        }
+
+        .hero {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(18, 18, 18, 0.06);
+        }
+
+        .hero small {
+            display: block;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hero h1 {
+            margin: 0 0 1.25rem;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 700px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .section {
+            max-width: 960px;
+            margin: 0 auto 2.75rem;
+            background: var(--surface);
+            padding: 2.75rem;
+            border-radius: 26px;
+            box-shadow: 0 22px 44px rgba(18, 18, 18, 0.05);
+        }
+
+        .section h2 {
+            margin: 0 0 1.25rem;
+            font-size: 1.7rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section p {
+            margin: 0 0 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .section ul {
+            margin: 0 0 1.1rem 1.25rem;
+            color: var(--text-muted);
+            padding-left: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.65rem;
+        }
+
+        .section li:last-child { margin-bottom: 0; }
+
+        .related {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+
+        .related a,
+        .related span {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .related a:hover,
+        .related a:focus { text-decoration: underline; }
+
+        footer {
+            background: var(--background);
+            border-top: 1px solid var(--divider);
+        }
+
+        footer .layout {
+            flex-wrap: wrap;
+            row-gap: 0.75rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        footer a:hover,
+        footer a:focus { text-decoration: underline; }
+
+        @media (max-width: 720px) {
+            .layout { flex-direction: column; align-items: flex-start; }
+            .nav-toggle { display: inline-flex; }
+            nav {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.85rem;
+                max-height: 0;
+                overflow: hidden;
+            }
+            nav[data-open="true"] { max-height: 600px; }
+            .hero, .section { padding: 2.4rem 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div class="brand">
+                <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
+            </div>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menú</button>
+            <nav id="main-nav" aria-label="Menú principal" data-open="false">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Política de privacidad</a>
+                <a class="nav-link" aria-current="page" href="terminos.html">Términos y condiciones</a>
+                <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
+                <a class="nav-link" href="soporte.html">Soporte</a>
+                <a class="nav-link" href="solicitud-eliminacion.html">Eliminar datos</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <small>Legales</small>
+            <h1>Términos y Condiciones de Uso</h1>
+            <p>Estos términos regulan el acceso y uso de la plataforma Mappets. Al crear una cuenta o utilizar la aplicación, aceptás las políticas descritas aquí y las reglas complementarias. Si no estás de acuerdo, debés abstenerte de usar el servicio.</p>
+        </section>
+
+        <section class="section" id="alcance">
+            <h2>1. Alcance del servicio</h2>
+            <p>Mappets conecta a personas interesadas en el cuidado y la protección de animales mediante fichas de mascotas perdidas, encontradas, en adopción o tránsito compartidas por la comunidad. Podemos actualizar las funcionalidades sin previo aviso para mejorar la experiencia o cumplir con requisitos legales.</p>
+        </section>
+
+        <section class="section" id="registro">
+            <h2>2. Registro y cuenta</h2>
+            <ul>
+                <li>Debés proporcionar datos veraces y mantenerlos actualizados.</li>
+                <li>Las credenciales son personales e intransferibles; sos responsable del uso que se haga de tu cuenta.</li>
+                <li>Podés solicitar la baja desde la aplicación o escribiendo a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="contenido">
+            <h2>3. Contenido generado por usuarias y usuarios</h2>
+            <p>Garantizás que tenés derechos suficientes sobre textos e imágenes que compartas. No publiques contenido ilegal, ofensivo ni que vulnere derechos de terceros. Podemos moderar, editar o eliminar publicaciones que incumplan estas reglas o la normativa vigente.</p>
+        </section>
+
+        <section class="section" id="uso-aceptable">
+            <h2>4. Uso aceptable</h2>
+            <p>Está prohibido emplear Mappets para actividades fraudulentas, enviar spam, distribuir software malicioso, interferir con la operación de la plataforma o afectar la experiencia de otras personas. Podemos limitar funciones cuando detectemos riesgos de seguridad.</p>
+        </section>
+
+        <section class="section" id="terceros">
+            <h2>5. Servicios y enlaces de terceros</h2>
+            <p>Podemos ofrecer enlaces o integraciones con proveedores externos. Cada tercero define sus propios términos y políticas, por lo que te recomendamos revisarlos antes de usarlos. Mappets no se responsabiliza por sus prestaciones.</p>
+        </section>
+
+        <section class="section" id="propiedad-intelectual">
+            <h2>6. Propiedad intelectual</h2>
+            <p>El software, diseños, logotipos y materiales propios de Mappets están protegidos. Solo podés utilizarlos dentro de la plataforma y de acuerdo con estos términos.</p>
+        </section>
+
+        <section class="section" id="responsabilidad">
+            <h2>7. Limitación de responsabilidad</h2>
+            <p>Mappets es un intermediario que facilita la comunicación entre personas. No garantizamos resultados específicos ni asumimos responsabilidad por acuerdos celebrados fuera de la aplicación. El servicio puede verse interrumpido por tareas de mantenimiento o causas ajenas al titular.</p>
+        </section>
+
+        <section class="section" id="suspension">
+            <h2>8. Suspensión o cierre de cuentas</h2>
+            <p>Podemos suspender o cancelar cuentas que infrinjan estos términos, la ley o generen riesgos para la comunidad. En la medida de lo posible, notificaremos el motivo y los pasos para regularizar la situación.</p>
+        </section>
+
+        <section class="section" aria-labelledby="relacionados">
+            <h2 id="relacionados">Documentos relacionados</h2>
+            <div class="related">
+                <a href="privacidad.html">Política de Privacidad</a>
+                <a href="aviso-legal.html">Aviso Legal</a>
+                <span>Política de Cookies</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="donaciones.html">Donaciones</a>
+        </div>
+    </footer>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('#main-nav');
+        navToggle?.addEventListener('click', () => {
+            const isOpen = mainNav?.getAttribute('data-open') === 'true';
+            const nextState = (!isOpen).toString();
+            mainNav?.setAttribute('data-open', nextState);
+            navToggle.setAttribute('aria-expanded', nextState);
+        });
+    </script>
+</body>
+</html>

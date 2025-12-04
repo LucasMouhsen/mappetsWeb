@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mappets | Política de privacidad</title>
-    <meta name="description" content="Conoce cómo Mappets protege y gestiona tu información personal.">
+    <title>Mappets | Política de Privacidad</title>
+    <meta name="description" content="Política de privacidad de Mappets: datos recopilados, uso, derechos y contacto.">
     <style>
         :root {
             --background: #ffffff;
@@ -17,9 +17,7 @@
             --divider: rgba(34, 34, 34, 0.08);
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -29,10 +27,7 @@
             line-height: 1.6;
         }
 
-        header {
-            background: var(--background);
-            border-bottom: 1px solid var(--divider);
-        }
+        header { background: var(--background); border-bottom: 1px solid var(--divider); }
 
         .layout {
             max-width: 960px;
@@ -52,30 +47,14 @@
             color: var(--text-primary);
         }
 
-        .brand-mark {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: #ffffff;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-        }
-
-        .brand-logo {
-            display: block;
-            height: 100px;
-            width: auto;
-        }
+        .brand-logo { display: block; height: 100px; width: auto; }
 
         nav {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            transition: max-height 0.25s ease;
         }
 
         .nav-link {
@@ -87,16 +66,34 @@
             transition: color 0.2s ease, border-bottom-color 0.2s ease;
         }
 
-        .nav-link:focus,
         .nav-link:hover,
+        .nav-link:focus,
         .nav-link[aria-current="page"] {
             color: var(--accent);
             border-bottom-color: var(--accent);
         }
 
-        main {
-            padding: 3.5rem 1.25rem 4rem;
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--divider);
+            background: #ffffff;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
+
+        .nav-toggle:focus,
+        .nav-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(18, 18, 18, 0.08);
+        }
+
+        main { padding: 3.5rem 1.25rem 4rem; }
 
         .hero {
             max-width: 960px;
@@ -123,12 +120,9 @@
             letter-spacing: -0.01em;
         }
 
-        .hero p {
-            margin: 0;
-            max-width: 640px;
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
+        .hero p { margin: 0; max-width: 720px; color: var(--text-muted); font-size: 1.05rem; }
+
+        .muted { color: var(--text-muted); font-size: 0.96rem; }
 
         .section {
             max-width: 960px;
@@ -145,10 +139,7 @@
             letter-spacing: -0.01em;
         }
 
-        .section p {
-            margin: 0 0 1.1rem;
-            color: var(--text-muted);
-        }
+        .section p { margin: 0 0 1.1rem; color: var(--text-muted); }
 
         .section ul,
         .section ol {
@@ -157,18 +148,8 @@
             padding-left: 1rem;
         }
 
-        .section li {
-            margin-bottom: 0.65rem;
-        }
-
-        .section li:last-child {
-            margin-bottom: 0;
-        }
-
-        .muted {
-            color: var(--text-muted);
-            font-size: 0.96rem;
-        }
+        .section li { margin-bottom: 0.65rem; }
+        .section li:last-child { margin-bottom: 0; }
 
         .card-inline {
             display: grid;
@@ -178,48 +159,43 @@
             padding: 1.5rem;
         }
 
-        footer {
-            background: var(--background);
-            border-top: 1px solid var(--divider);
-        }
-
-        footer .layout {
+        .related {
+            display: flex;
+            gap: 1rem;
             flex-wrap: wrap;
-            row-gap: 0.75rem;
+            margin-top: 1.25rem;
         }
 
-        footer p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        footer a {
+        .related a,
+        .related span {
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
             text-decoration: none;
         }
 
-        footer a:focus,
-        footer a:hover {
-            text-decoration: underline;
-        }
+        .related a:hover,
+        .related a:focus { text-decoration: underline; }
+
+        footer { background: var(--background); border-top: 1px solid var(--divider); }
+        footer .layout { flex-wrap: wrap; row-gap: 0.75rem; }
+        footer p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+        footer a { color: var(--accent); font-weight: 500; text-decoration: none; }
+        footer a:hover,
+        footer a:focus { text-decoration: underline; }
 
         @media (max-width: 720px) {
-            .layout {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
+            .layout { flex-direction: column; align-items: flex-start; }
+            .nav-toggle { display: inline-flex; }
             nav {
                 width: 100%;
-                justify-content: flex-start;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.85rem;
+                max-height: 0;
+                overflow: hidden;
             }
-
-            .hero,
-            .section {
-                padding: 2.4rem 1.9rem;
-            }
+            nav[data-open="true"] { max-height: 600px; }
+            .hero, .section { padding: 2.4rem 1.9rem; }
         }
     </style>
 </head>
@@ -229,121 +205,99 @@
             <div class="brand">
                 <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
             </div>
-            <nav aria-label="Menú principal">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menú</button>
+            <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
                 <a class="nav-link" href="donaciones.html">Donaciones</a>
-                <a class="nav-link" aria-current="page" href="privacidad.html">Políticas de privacidad</a>
+                <a class="nav-link" aria-current="page" href="privacidad.html">Política de privacidad</a>
+                <a class="nav-link" href="terminos.html">Términos y condiciones</a>
+                <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
                 <a class="nav-link" href="soporte.html">Soporte</a>
-                <a class="nav-link" href="solicitud-eliminación.html">Eliminar datos</a>
+                <a class="nav-link" href="solicitud-eliminacion.html">Eliminar datos</a>
             </nav>
         </div>
     </header>
     <main>
         <section class="hero">
             <small>Protección de datos</small>
-            <h1>Política de privacidad de Mappets</h1>
-            <p>Queremos que sepas qué información usamos en la app, por qué la necesitamos y de qué manera podés controlar su uso.</p>
-        </section>
-        <section class="section" aria-labelledby="resumen">
-            <h2 id="resumen">Resumen clave</h2>
-            <ul>
-                <li>Recopilamos solo la información necesaria para que puedas usar la app y contactar a la comunidad.</li>
-                <li>Las fichas de mascotas que creás, con sus fotos y datos básicos, son visibles para ayudar en los reencuentros.</li>
-                <li>Pedimos permisos de tu teléfono únicamente cuando sirven para funciones concretas, como subir fotos o mostrar el mapa.</li>
-                <li>No vendemos tu información y la compartimos solo con quienes nos ayudan a prestar el servicio o cuando la ley lo exige.</li>
-                <li>Podés revisar, actualizar o borrar tus datos escribiendo a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</li>
-            </ul>
-        </section>
-        <section class="section" id="responsable" aria-labelledby="responsable-titulo">
-            <h2 id="responsable-titulo">Responsable del tratamiento</h2>
-            <p>Mappets App es la responsable de los datos tratados a través de la aplicación móvil y sus sitios asociados.</p>
-            <div class="card-inline">
-                <p class="muted"><strong>Correo de contacto:</strong> <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a></p>
-                <p class="muted"><strong>Domicilio:</strong> Avenida Comunidad 123, Ciudad Digital.</p>
-            </div>
-        </section>
-        <section class="section" id="datos" aria-labelledby="datos-titulo">
-            <h2 id="datos-titulo">Datos que recopilamos</h2>
-            <p>Recopilamos la información mínima necesaria para que Mappets funcione correctamente:</p>
-            <ul>
-                <li><strong>Datos de tu cuenta:</strong> nombre, correo electrónico y foto de perfil opcional para identificarte en la app.</li>
-                <li><strong>Información de tus mascotas:</strong> datos que cargás en sus fichas, como descripción, estado y fotografías.</li>
-                <li><strong>Ubicación aproximada:</strong> la zona que indicás cuando reportás una mascota, para orientar a quienes ayudan en la búsqueda.</li>
-                <li><strong>Mensajes en la app:</strong> conversaciones que tenés con otras personas usuarias para coordinar reencuentros.</li>
-                <li><strong>Preferencias y avisos:</strong> elecciones sobre notificaciones, recordatorios y tu experiencia en la plataforma.</li>
-                <li><strong>Encuestas y comentarios:</strong> respuestas voluntarias que compartís para mejorar el servicio.</li>
-            </ul>
-            <p>No pedimos información sensible ni accedemos a datos del dispositivo que no estén relacionados con estas funciones.</p>
-        </section>
-        <section class="section" id="permisos" aria-labelledby="permisos-titulo">
-            <h2 id="permisos-titulo">Permisos del dispositivo</h2>
-            <p>La app te pedirá autorizar ciertos accesos para ofrecer sus funciones principales:</p>
-            <ul>
-                <li><strong>Galería y cámara:</strong> para que puedas subir o actualizar fotos tuyas y de tus mascotas.</li>
-                <li><strong>Ubicación:</strong> para sugerirte una zona en el mapa cuando cargás una alerta o buscás ayuda cerca.</li>
-                <li><strong>Notificaciones:</strong> para avisarte mensajes nuevos, actualizaciones y recordatorios importantes.</li>
-            </ul>
-            <p>Podés cambiar estos permisos en cualquier momento desde la configuración de tu dispositivo. Si los desactivás, algunas funciones pueden dejar de estar disponibles.</p>
-        </section>
-        <section class="section" id="uso" aria-labelledby="uso-titulo">
-            <h2 id="uso-titulo">Para qué usamos la información</h2>
-            <ol>
-                <li>Crear tu cuenta y darte acceso a la app.</li>
-                <li>Publicar y actualizar las fichas de tus mascotas para compartirlas con la comunidad.</li>
-                <li>Facilitar el contacto entre personas usuarias y enviar avisos relacionados con sus publicaciones.</li>
-                <li>Responder consultas y mejorar la experiencia a partir de tus comentarios.</li>
-                <li>Cumplir obligaciones legales y responder solicitudes de autoridades cuando corresponda.</li>
-            </ol>
-        </section>
-        <section class="section" id="bases" aria-labelledby="bases-titulo">
-            <h2 id="bases-titulo">Por qué podemos usar tus datos</h2>
-            <p>Tratamos tu información porque aceptás esta política cuando creás tu cuenta y porque necesitamos esos datos para ofrecerte las funciones principales de Mappets.</p>
-            <p>En ocasiones la ley nos obliga a conservar o compartir información con autoridades. Si hubiera cambios importantes en los motivos o finalidades, te lo avisaremos antes de aplicarlos.</p>
-        </section>
-        <section class="section" id="compartimos" aria-labelledby="compartimos-titulo">
-            <h2 id="compartimos-titulo">Con quién compartimos tus datos</h2>
-            <ul>
-                <li><strong>Comunidad Mappets:</strong> las fichas que publicás, con fotos y ubicación aproximada, son visibles para las personas usuarias registradas. Los mensajes privados solo los leen quienes participan en la conversación.</li>
-                <li><strong>Equipos de apoyo:</strong> empresas que nos brindan servicios indispensables, como alojar la información o enviar correos y notificaciones. Trabajan bajo acuerdos de confidencialidad y solo pueden usarlos para lo que les pedimos.</li>
-                <li><strong>Autoridades competentes:</strong> cuando existe una obligación legal o una orden válida.</li>
-            </ul>
-            <p>No vendemos tus datos personales a terceros ni mostramos publicidad basada en perfiles.</p>
-        </section>
-        <section class="section" id="transferencias" aria-labelledby="transferencias-titulo">
-            <h2 id="transferencias-titulo">Transferencias internacionales</h2>
-            <p>A veces utilizamos servidores ubicados en otros países para prestar el servicio. Cuando esto sucede, exigimos que mantengan la misma protección que ofrecemos nosotros y firmamos acuerdos para asegurar el cuidado de tus datos.</p>
-        </section>
-        <section class="section" id="conservacion" aria-labelledby="conservacion-titulo">
-            <h2 id="conservacion-titulo">Plazos de conservación</h2>
-            <ul>
-                <li>Mantenemos los datos de tu cuenta mientras la uses o hasta que nos pidas eliminarlos.</li>
-                <li>Las publicaciones y mensajes se guardan mientras estén activos o hasta que los borres desde la app.</li>
-                <li>Podemos conservar información despersonalizada para estadísticas y mejoras del servicio.</li>
-            </ul>
-        </section>
-        <section class="section" id="derechos" aria-labelledby="derechos-titulo">
-            <h2 id="derechos-titulo">Tus derechos</h2>
-            <p>Podés ejercer los derechos de acceso, rectificación, actualización, portabilidad, oposición, supresión y limitación del tratamiento.</p>
-            <div class="card-inline">
-                <p class="muted">Envianos tu solicitud a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a> indicando tu nombre completo, el correo registrado y el derecho que deseás ejercer. Responderemos en un plazo máximo de 30 días.</p>
-            </div>
-        </section>
-        <section class="section" id="seguridad" aria-labelledby="seguridad-titulo">
-            <h2 id="seguridad-titulo">Medidas de seguridad</h2>
-            <p>Aplicamos medidas administrativas y técnicas para proteger la información. Limitamos el acceso a nuestro equipo autorizado, monitoreamos la plataforma y revisamos posibles incidentes. Aunque trabajamos para resguardar tus datos, ninguna herramienta digital es totalmente infalible.</p>
-        </section>
-        <section class="section" id="menores" aria-labelledby="menores-titulo">
-            <h2 id="menores-titulo">Menores de edad</h2>
-            <p>Mappets está dirigida a personas mayores de 14 años. Si tenemos constancia de que hemos recibido datos de menores sin el consentimiento correspondiente, procederemos a eliminarlos.</p>
-        </section>
-        <section class="section" id="cambios" aria-labelledby="cambios-titulo">
-            <h2 id="cambios-titulo">Actualizaciones de la política</h2>
-            <p>Podemos modificar esta política para reflejar mejoras de la app o cambios regulatorios. Publicaremos la versión vigente en esta página indicando la fecha de actualización.</p>
+            <h1>Política de Privacidad</h1>
+            <p>Esta política describe cómo tratamos los datos personales cuando usás Mappets. Trabajamos con transparencia, aplicamos controles de seguridad acordes al riesgo y te avisaremos si realizamos cambios sustanciales.</p>
             <p class="muted">Fecha de entrada en vigor: 15 de octubre de 2025.</p>
         </section>
-        <section class="section" id="contacto" aria-labelledby="contacto-titulo">
-            <h2 id="contacto-titulo">Contacto</h2>
-            <p>Si tenés dudas o necesitás más información sobre la protección de tus datos, escribinos a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</p>
+
+        <section class="section" id="datos" aria-labelledby="datos-titulo">
+            <h2 id="datos-titulo">Datos que recopilamos</h2>
+            <ul>
+                <li><strong>Identificación y contacto:</strong> nombre, apellido, correo electrónico, teléfono y contraseña cifrada.</li>
+                <li><strong>Perfil:</strong> fotografía opcional, descripción breve y preferencias para notificaciones.</li>
+                <li><strong>Información de mascotas:</strong> nombre, descripciones, estado, fotos y zona aproximada asociada a tus fichas o publicaciones.</li>
+                <li><strong>Datos técnicos:</strong> idioma del dispositivo, versión del sistema, dirección IP, identificadores de sesión y registros necesarios para detectar abusos.</li>
+                <li><strong>Ubicación aproximada:</strong> solo cuando la autorizás, para sugerirte resultados cercanos y facilitar reencuentros.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="uso" aria-labelledby="uso-titulo">
+            <h2 id="uso-titulo">Para qué usamos los datos</h2>
+            <ol>
+                <li>Crear y mantener tu cuenta, responder consultas y personalizar la experiencia.</li>
+                <li>Publicar fichas de mascotas perdidas, encontradas, en adopción o tránsito y gestionar esas publicaciones dentro de la comunidad.</li>
+                <li>Mejorar la plataforma con métricas agregadas y comentarios, procurando anonimizar la información cuando sea posible.</li>
+                <li>Prevenir abusos, investigar reportes y cumplir obligaciones regulatorias vigentes.</li>
+            </ol>
+        </section>
+
+        <section class="section" id="base-legal" aria-labelledby="base-titulo">
+            <h2 id="base-titulo">Base legal y conservación</h2>
+            <p>Procesamos los datos con base en tu consentimiento informado, la ejecución del contrato de uso de Mappets y nuestro interés legítimo en mantener la seguridad del servicio. Cuando una norma exige conservar información, actuamos según esa obligación legal.</p>
+            <ul>
+                <li>Guardamos tu cuenta mientras siga activa o hasta que solicites su eliminación.</li>
+                <li>Las publicaciones y mensajes se conservan hasta que los borres o hasta 24 meses después de cerrar la cuenta, salvo obligaciones legales.</li>
+                <li>Los registros técnicos se anonimizarán o eliminarán una vez cumplida su finalidad.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="compartir" aria-labelledby="compartir-titulo">
+            <h2 id="compartir-titulo">Compartición de datos</h2>
+            <ul>
+                <li><strong>Personas usuarias registradas:</strong> acceden a la información que decidís hacer pública en cada ficha o publicación.</li>
+                <li><strong>Proveedores tecnológicos:</strong> alojan datos, envían correos y notifican eventos críticos bajo acuerdos de confidencialidad.</li>
+                <li><strong>Autoridades competentes:</strong> solo ante requisitorias válidas o situaciones vinculadas al bienestar de personas o animales.</li>
+            </ul>
+            <p>No vendemos tus datos ni realizamos publicidad basada en perfiles.</p>
+        </section>
+
+        <section class="section" id="derechos" aria-labelledby="derechos-titulo">
+            <h2 id="derechos-titulo">Tus derechos</h2>
+            <p>Podés solicitar acceso, rectificación, actualización, portabilidad, oposición, limitación o supresión de tu información. También podés revocar el consentimiento sin afectar la licitud de los tratamientos previos.</p>
+            <div class="card-inline">
+                <p class="muted">Para ejercer tus derechos escribí a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a> indicando nombre completo, correo registrado y el pedido concreto. Respondemos dentro de 30 días hábiles según la normativa argentina.</p>
+            </div>
+        </section>
+
+        <section class="section" id="seguridad" aria-labelledby="seguridad-titulo">
+            <h2 id="seguridad-titulo">Seguridad y menores</h2>
+            <p>Aplicamos controles técnicos y organizativos, limitamos el acceso interno y revisamos posibles incidentes. Ninguna plataforma digital es infalible, por lo que notificaremos con celeridad cualquier incidente relevante.</p>
+            <p>Mappets está dirigida a personas mayores de 14 años. Si detectamos datos de menores sin autorización, los eliminaremos.</p>
+        </section>
+
+        <section class="section" id="ubicacion" aria-labelledby="ubicacion-titulo">
+            <h2 id="ubicacion-titulo">Ubicación en segundo plano (solo alertas cercanas)</h2>
+            <p>Mappets utiliza la ubicación en segundo plano únicamente para enviarte notificaciones cuando hay mascotas perdidas cerca de ti, incluso si la app está cerrada. No realizamos seguimiento continuo para otros fines, no construimos historiales de movimiento ni vendemos esta información.</p>
+            <ul>
+                <li><strong>Control:</strong> Podés activar o desactivar estas alertas desde el perfil o los ajustes del sistema en cualquier momento.</li>
+                <li><strong>iOS:</strong> Requiere la opción "Siempre" para funcionar en segundo plano. Si eliges "Al usar la app", el mapa funcionará igual pero no recibirás alertas en segundo plano.</li>
+                <li><strong>Android:</strong> Requiere "Permitir todo el tiempo/Segundo plano" para poder avisarte aun con la app cerrada.</li>
+                <li><strong>Conservación:</strong> Usamos la ubicación de forma efímera para calcular cercanía y generar la notificación; no almacenamos un recorrido continuo.</li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="relacionados">
+            <h2 id="relacionados">Documentos relacionados</h2>
+            <div class="related">
+                <a href="terminos.html">Términos y Condiciones</a>
+                <a href="aviso-legal.html">Aviso Legal</a>
+                <span>Política de Cookies</span>
+            </div>
         </section>
     </main>
     <footer>
@@ -352,6 +306,15 @@
             <a href="donaciones.html">Donaciones</a>
         </div>
     </footer>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('#main-nav');
+        navToggle?.addEventListener('click', () => {
+            const isOpen = mainNav?.getAttribute('data-open') === 'true';
+            const nextState = (!isOpen).toString();
+            mainNav?.setAttribute('data-open', nextState);
+            navToggle.setAttribute('aria-expanded', nextState);
+        });
+    </script>
 </body>
 </html>
-
