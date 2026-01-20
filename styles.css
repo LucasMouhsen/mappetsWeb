@@ -114,6 +114,7 @@ header {
     gap: 0.75rem;
     font-weight: 600;
     color: var(--header-title);
+    text-decoration: none;
 }
 
 .brand-logo {
@@ -173,8 +174,11 @@ nav {
 .nav-toggle {
     display: none;
     align-items: center;
+    justify-content: center;
     gap: 0.35rem;
     padding: 0.55rem 0.85rem;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.8);
@@ -182,6 +186,16 @@ nav {
     font-weight: 700;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-toggle-icon {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--ink);
+    position: relative;
+    box-shadow: 0 -6px 0 var(--ink), 0 6px 0 var(--ink);
 }
 
 .nav-toggle:hover,
@@ -735,6 +749,20 @@ footer a:focus {
     .layout {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    header .layout {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    header .nav-toggle {
+        margin-left: auto;
+    }
+
+    header nav {
+        flex-basis: 100%;
     }
 
     .nav-toggle {
