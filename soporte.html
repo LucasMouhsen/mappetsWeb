@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mappets | Soporte</title>
     <meta name="description" content="Centro de ayuda de Mappets: contacto de soporte, preguntas frecuentes y tiempos de respuesta.">
+    <meta name="theme-color" content="#f4be4c">
+    <meta name="robots" content="index,follow">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <header>
         <div class="layout">
             <a class="brand" href="index.html" aria-label="Ir al inicio">
@@ -19,7 +22,7 @@
             </button>
             <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
-                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="index.html#donaciones">Donaciones</a>
                 <a class="nav-link" href="privacidad.html">Política de privacidad</a>
                 <a class="nav-link" href="terminos.html">Términos y condiciones</a>
                 <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
@@ -28,7 +31,7 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main id="main-content">
         <section class="hero">
             <small>Soporte de Mappets</small>
             <h1>Centro de ayuda y contacto</h1>
@@ -40,10 +43,10 @@
                 <h2>Escríbenos por correo</h2>
                 <p>Envía tu consulta a nuestro equipo de soporte.</p>
                 <div class="support-actions">
-                    <a class="button" href="mailto:lucasmouhsen@mappets.com.ar?subject=Soporte%20Mappets%20(iOS)&body=Contanos%20tu%20consulta%3A%0A-%20Describí%20el%20problema%3A%0A-%20Versi%C3%B3n%20de%20iOS%3A%0A-%20Versi%C3%B3n%20de%20la%20app%3A%0A-%20Capturas%20(opcional)%3A%0A">Abrir correo</a>
+                    <a class="button" href="mailto:equipo@mappets.com.ar?subject=Soporte%20Mappets%20(iOS)&body=Contanos%20tu%20consulta%3A%0A-%20Describí%20el%20problema%3A%0A-%20Versi%C3%B3n%20de%20iOS%3A%0A-%20Versi%C3%B3n%20de%20la%20app%3A%0A-%20Capturas%20(opcional)%3A%0A">Abrir correo</a>
                     <a class="button secondary" href="#contacto">Usar formulario</a>
                 </div>
-                <p class="note">Correo de soporte: <strong>lucasmouhsen@mappets.com.ar</strong></p>
+                <p class="note">Correo de soporte: <strong>equipo@mappets.com.ar</strong></p>
             </article>
             <article class="card" aria-labelledby="faq-title">
                 <h2 id="faq-title">Preguntas frecuentes</h2>
@@ -69,11 +72,11 @@
                 <div class="row">
                     <div class="input-group">
                         <label for="nombre">Nombre</label>
-                        <input id="nombre" name="nombre" type="text" placeholder="Tu nombre">
+                        <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name">
                     </div>
                     <div class="input-group">
                         <label for="email">Correo electrónico</label>
-                        <input id="email" name="email" type="email" placeholder="nombre@ejemplo.com" required>
+                        <input id="email" name="email" type="email" placeholder="nombre@ejemplo.com" autocomplete="email" inputmode="email" required>
                     </div>
                 </div>
                 <div class="row">
@@ -88,17 +91,17 @@
                     </div>
                     <div class="input-group">
                         <label for="ios">Versión de iOS (opcional)</label>
-                        <input id="ios" name="ios" type="text" placeholder="Ej: iOS 18.0">
+                        <input id="ios" name="ios" type="text" placeholder="Ej: iOS 18.0" autocomplete="off">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group">
                         <label for="app">Versión de la app (opcional)</label>
-                        <input id="app" name="app" type="text" placeholder="Ej: 1.0.0">
+                        <input id="app" name="app" type="text" placeholder="Ej: 1.0.0" autocomplete="off">
                     </div>
                     <div class="input-group">
                         <label for="dispositivo">Dispositivo (opcional)</label>
-                        <input id="dispositivo" name="dispositivo" type="text" placeholder="Ej: iPhone 13">
+                        <input id="dispositivo" name="dispositivo" type="text" placeholder="Ej: iPhone 13" autocomplete="off">
                     </div>
                 </div>
                 <div class="input-group">
@@ -109,19 +112,19 @@
                 <p class="feedback" id="form-feedback" role="status" aria-live="polite"></p>
             </form>
             <div class="note">
-                <p>Tiempo de respuesta estimado: 1–3 días hábiles. Si tenés urgencia, escribinos directo a <strong>lucasmouhsen@mappets.com.ar</strong>.</p>
+                <p>Tiempo de respuesta estimado: 1–3 días hábiles. Si tenés urgencia, escribinos directo a <strong>equipo@mappets.com.ar</strong>.</p>
                 <p>Consulta nuestra <a href="privacidad.html">Política de privacidad</a>. Para eliminación de datos, visitá <a href="solicitud-eliminacion.html">esta página</a>.</p>
             </div>
         </section>
         
         <!-- Modal de éxito -->
-        <div id="success-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="success-title" hidden>
+        <div id="success-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-description" hidden>
             <div class="modal">
                 <header>
                     <h3 id="success-title">Consulta enviada</h3>
                 </header>
                 <div class="content">
-                    <p>Gracias por escribirnos. Recibimos tu mensaje y te responderemos por correo dentro de 1–3 días hábiles.</p>
+                    <p id="success-description">Gracias por escribirnos. Recibimos tu mensaje y te responderemos por correo dentro de 1–3 días hábiles.</p>
                 </div>
                 <div class="actions">
                     <button type="button" class="button" data-close-modal>Aceptar</button>
@@ -135,114 +138,9 @@
             <a href="privacidad.html">Políticas de privacidad</a>
         </div>
     </footer>
-    <script>
-        const navToggle = document.querySelector('.nav-toggle');
-        const mainNav = document.querySelector('#main-nav');
-        navToggle?.addEventListener('click', () => {
-            const isOpen = mainNav?.getAttribute('data-open') === 'true';
-            const nextState = (!isOpen).toString();
-            mainNav?.setAttribute('data-open', nextState);
-            navToggle.setAttribute('aria-expanded', nextState);
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('support-form');
-            const feedback = document.getElementById('form-feedback');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const endpoint = 'https://formsubmit.co/ajax/lucasmouhsen@mappets.com.ar';
-
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                feedback.textContent = '';
-                feedback.classList.remove('error');
-
-                const data = new FormData(form);
-                const email = (data.get('email') || '').toString().trim();
-                const mensaje = (data.get('mensaje') || '').toString().trim();
-
-                if (!email || !form.email.checkValidity()) {
-                    feedback.textContent = 'Ingresá un correo válido para continuar.';
-                    feedback.classList.add('error');
-                    form.email.focus();
-                    return;
-                }
-                if (!mensaje) {
-                    feedback.textContent = 'Contanos brevemente tu consulta.';
-                    feedback.classList.add('error');
-                    document.getElementById('mensaje').focus();
-                    return;
-                }
-
-                submitButton.disabled = true;
-                const originalLabel = submitButton.textContent;
-                submitButton.textContent = 'Enviando...';
-
-                const payload = {
-                    _subject: 'Consulta de soporte - Mappets (iOS)',
-                    nombre: data.get('nombre') || '',
-                    email,
-                    motivo: data.get('motivo') || 'Consulta general',
-                    ios_version: data.get('ios') || '',
-                    app_version: data.get('app') || '',
-                    device: data.get('dispositivo') || '',
-                    message: mensaje
-                };
-
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (!response.ok) throw new Error('Respuesta no válida');
-                    feedback.textContent = 'Consulta enviada. Te responderemos por correo a la brevedad.';
-                    form.reset();
-                } catch (error) {
-                    feedback.textContent = 'No pudimos enviar el formulario. Escribinos a lucasmouhsen@mappets.com.ar.';
-                    feedback.classList.add('error');
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalLabel;
-                }
-            });
-        });
-    </script>
-    <script>
-        // Popup de confirmación al enviar el formulario
-        (function() {
-            const modal = document.getElementById('success-modal');
-            if (!modal) return;
-            const closeBtn = modal.querySelector('[data-close-modal]');
-            let lastFocus = null;
-            function openSuccessModal() {
-                lastFocus = document.activeElement;
-                modal.hidden = false;
-                if (closeBtn) closeBtn.focus();
-                document.addEventListener('keydown', escHandler);
-            }
-            function closeSuccessModal() {
-                modal.hidden = true;
-                document.removeEventListener('keydown', escHandler);
-                if (lastFocus && lastFocus.focus) lastFocus.focus();
-            }
-            function escHandler(e){ if (e.key === 'Escape') closeSuccessModal(); }
-            modal.addEventListener('click', (e) => { if (e.target === modal) closeSuccessModal(); });
-            if (closeBtn) closeBtn.addEventListener('click', closeSuccessModal);
-
-            // Intercepta la petición de envío del formulario y muestra el modal si fue exitosa
-            const originalFetch = window.fetch.bind(window);
-            window.fetch = async function(input, init) {
-                const response = await originalFetch(input, init);
-                try {
-                    const url = typeof input === 'string' ? input : (input && input.url) || '';
-                    if (response.ok && /formsubmit\.co\/ajax\//.test(url)) {
-                        openSuccessModal();
-                    }
-                } catch (_) { /* noop */ }
-                return response;
-            };
-        })();
-    </script>
+        <script src="scripts.js" defer></script>
 </body>
 </html>
+
+
+

@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mappets | Solicitud de eliminación de datos</title>
     <meta name="description" content="Solicita la eliminación de tus datos personales registrados en Mappets.">
+    <meta name="theme-color" content="#f4be4c">
+    <meta name="robots" content="index,follow">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <header>
         <div class="layout">
             <a class="brand" href="index.html" aria-label="Ir al inicio">
@@ -19,7 +22,7 @@
             </button>
             <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
-                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="index.html#donaciones">Donaciones</a>
                 <a class="nav-link" href="privacidad.html">Política de privacidad</a>
                 <a class="nav-link" href="terminos.html">Términos y condiciones</a>
                 <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
@@ -28,7 +31,7 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main id="main-content">
         <section class="hero">
             <small>Protección de datos</small>
             <h1>Solicitá la eliminación de tu información personal</h1>
@@ -40,7 +43,7 @@
             <form class="request-form" id="deletion-form" novalidate>
                 <div class="input-group">
                     <label for="email">Correo registrado</label>
-                    <input id="email" name="email" type="email" placeholder="nombre@ejemplo.com" required>
+                    <input id="email" name="email" type="email" placeholder="nombre@ejemplo.com" autocomplete="email" inputmode="email" required>
                 </div>
                 <button class="button" type="submit">Enviar solicitud</button>
                 <p class="feedback" id="form-feedback" role="status" aria-live="polite"></p>
@@ -57,89 +60,9 @@
             <a href="privacidad.html">Políticas de privacidad</a>
         </div>
     </footer>
-    <script>
-        const navToggle = document.querySelector('.nav-toggle');
-        const mainNav = document.querySelector('#main-nav');
-        navToggle?.addEventListener('click', () => {
-            const isOpen = mainNav?.getAttribute('data-open') === 'true';
-            const nextState = (!isOpen).toString();
-            mainNav?.setAttribute('data-open', nextState);
-            navToggle.setAttribute('aria-expanded', nextState);
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('deletion-form');
-            const emailInput = document.getElementById('email');
-            const feedback = document.getElementById('form-feedback');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const endpoint = 'https://formsubmit.co/ajax/lucasmouhsen@mappets.com.ar';
-
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                feedback.textContent = '';
-                feedback.classList.remove('error');
-
-                const emailValue = emailInput.value.trim();
-
-                if (!emailValue) {
-                    feedback.textContent = 'Ingresá tu correo electrónico para continuar.';
-                    feedback.classList.add('error');
-                    emailInput.focus();
-                    return;
-                }
-
-                if (!emailInput.checkValidity()) {
-                    feedback.textContent = 'Revisá el formato del correo ingresado.';
-                    feedback.classList.add('error');
-                    emailInput.focus();
-                    return;
-                }
-
-                submitButton.disabled = true;
-                const originalLabel = submitButton.textContent;
-                submitButton.textContent = 'Enviando...';
-
-                const payload = {
-                    _subject: 'Solicitud de eliminación de datos personales',
-                    email: emailValue,
-                    message: [
-                        'Hola equipo Mappets,',
-                        '',
-                        'Solicito la eliminación definitiva de mis datos personales asociados a este correo.',
-                        '',
-                        'Por favor, confirmen cuando el proceso esté completo.',
-                        '',
-                        'Gracias.'
-                    ].join('')
-                };
-
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Respuesta no válida');
-                    }
-
-                    feedback.textContent = 'Solicitud enviada. Te vamos a responder a la brevedad.';
-                    form.reset();
-                    emailInput.blur();
-                } catch (error) {
-                    feedback.textContent = 'No pudimos enviar la solicitud. Intentá de nuevo o escribinos a lucasmouhsen@mappets.com.ar.';
-                    feedback.classList.add('error');
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalLabel;
-                }
-            });
-        });
-    </script>
+        <script src="scripts.js" defer></script>
 </body>
 </html>
+
+
+

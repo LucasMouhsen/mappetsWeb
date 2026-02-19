@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mappets | Términos y Condiciones</title>
     <meta name="description" content="Lee los Términos y Condiciones de uso de la plataforma Mappets.">
+    <meta name="theme-color" content="#f4be4c">
+    <meta name="robots" content="index,follow">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <header>
         <div class="layout">
             <a class="brand" href="index.html" aria-label="Ir al inicio">
@@ -19,7 +22,7 @@
             </button>
             <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
-                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="index.html#donaciones">Donaciones</a>
                 <a class="nav-link" href="privacidad.html">Política de privacidad</a>
                 <a class="nav-link" aria-current="page" href="terminos.html">Términos y condiciones</a>
                 <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
@@ -28,7 +31,7 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main id="main-content">
         <section class="hero">
             <small>Legales</small>
             <h1>Términos y Condiciones de Uso</h1>
@@ -45,7 +48,7 @@
             <ul>
                 <li>Debés proporcionar datos veraces y mantenerlos actualizados.</li>
                 <li>Las credenciales son personales e intransferibles; sos responsable del uso que se haga de tu cuenta.</li>
-                <li>Podés solicitar la baja desde la aplicación o escribiendo a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a>.</li>
+                <li>Podés solicitar la baja desde la aplicación o escribiendo a <a href="mailto:equipo@mappets.com.ar">equipo@mappets.com.ar</a>.</li>
             </ul>
         </section>
 
@@ -91,18 +94,12 @@
     <footer>
         <div class="layout">
             <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
-            <a href="donaciones.html">Donaciones</a>
+            <a href="index.html#donaciones">Donaciones</a>
         </div>
     </footer>
-    <script>
-        const navToggle = document.querySelector('.nav-toggle');
-        const mainNav = document.querySelector('#main-nav');
-        navToggle?.addEventListener('click', () => {
-            const isOpen = mainNav?.getAttribute('data-open') === 'true';
-            const nextState = (!isOpen).toString();
-            mainNav?.setAttribute('data-open', nextState);
-            navToggle.setAttribute('aria-expanded', nextState);
-        });
-    </script>
+        <script src="scripts.js" defer></script>
 </body>
 </html>
+
+
+

@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mappets | Política de Privacidad</title>
     <meta name="description" content="Política de privacidad de Mappets: datos recopilados, uso, derechos y contacto.">
+    <meta name="theme-color" content="#f4be4c">
+    <meta name="robots" content="index,follow">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <header>
         <div class="layout">
             <a class="brand" href="index.html" aria-label="Ir al inicio">
@@ -19,7 +22,7 @@
             </button>
             <nav id="main-nav" aria-label="Menú principal" data-open="false">
                 <a class="nav-link" href="index.html">Inicio</a>
-                <a class="nav-link" href="donaciones.html">Donaciones</a>
+                <a class="nav-link" href="index.html#donaciones">Donaciones</a>
                 <a class="nav-link" aria-current="page" href="privacidad.html">Política de privacidad</a>
                 <a class="nav-link" href="terminos.html">Términos y condiciones</a>
                 <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
@@ -28,7 +31,7 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main id="main-content">
         <section class="hero">
             <small>Protección de datos</small>
             <h1>Política de Privacidad</h1>
@@ -81,7 +84,7 @@
             <h2 id="derechos-titulo">Tus derechos</h2>
             <p>Podés solicitar acceso, rectificación, actualización, portabilidad, oposición, limitación o supresión de tu información. También podés revocar el consentimiento sin afectar la licitud de los tratamientos previos.</p>
             <div class="card-inline">
-                <p class="muted">Para ejercer tus derechos escribí a <a href="mailto:lucasmouhsen@mappets.com.ar">lucasmouhsen@mappets.com.ar</a> indicando nombre completo, correo registrado y el pedido concreto. Respondemos dentro de 30 días hábiles según la normativa argentina.</p>
+                <p class="muted">Para ejercer tus derechos escribí a <a href="mailto:equipo@mappets.com.ar">equipo@mappets.com.ar</a> indicando nombre completo, correo registrado y el pedido concreto. Respondemos dentro de 30 días hábiles según la normativa argentina.</p>
             </div>
         </section>
 
@@ -114,18 +117,12 @@
     <footer>
         <div class="layout">
             <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
-            <a href="donaciones.html">Donaciones</a>
+            <a href="index.html#donaciones">Donaciones</a>
         </div>
     </footer>
-    <script>
-        const navToggle = document.querySelector('.nav-toggle');
-        const mainNav = document.querySelector('#main-nav');
-        navToggle?.addEventListener('click', () => {
-            const isOpen = mainNav?.getAttribute('data-open') === 'true';
-            const nextState = (!isOpen).toString();
-            mainNav?.setAttribute('data-open', nextState);
-            navToggle.setAttribute('aria-expanded', nextState);
-        });
-    </script>
+        <script src="scripts.js" defer></script>
 </body>
 </html>
+
+
+
