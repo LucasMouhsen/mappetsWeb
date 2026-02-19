@@ -151,6 +151,10 @@ header {
     gap: 1.5rem;
 }
 
+header .layout {
+    max-width: 1240px;
+}
+
 .brand {
     display: flex;
     align-items: center;
@@ -184,20 +188,29 @@ nav {
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 0.4rem;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 12px 24px rgba(33, 37, 41, 0.12);
     transition: max-height 0.25s ease;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+nav::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-link {
     color: var(--nav-active);
     font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
     text-decoration: none;
-    padding: 0.4rem 0.8rem;
+    padding: 0.38rem 0.66rem;
     border-radius: 999px;
     transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
@@ -629,6 +642,8 @@ main > section.note {
     display: grid;
     gap: 1.3rem;
     max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 #deletion-form {
@@ -639,6 +654,10 @@ main > section.note {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
+}
+
+.row > .input-group:only-child {
+    grid-column: 1 / -1;
 }
 
 .input-group {
@@ -670,6 +689,23 @@ main > section.note {
     gap: 1.15rem;
 }
 
+.input-group input[type="file"] {
+    padding: 0.62rem 0.75rem;
+    border-style: dashed;
+    background: rgba(255, 248, 232, 0.52);
+}
+
+.input-group input[type="file"]::file-selector-button {
+    border: 1px solid rgba(33, 37, 41, 0.2);
+    background: #ffffff;
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.38rem 0.72rem;
+    margin-right: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .input-group textarea {
     min-height: 140px;
     resize: vertical;
@@ -691,6 +727,73 @@ main > section.note {
 
 .feedback.error {
     color: var(--error);
+}
+
+.map-block {
+    background: var(--surface-alt);
+    border: 1px solid rgba(33, 37, 41, 0.1);
+    border-radius: 16px;
+    padding: 1rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.map-block h3 {
+    margin: 0;
+    font-size: 1.08rem;
+}
+
+#commerce-map {
+    width: 100%;
+    height: 300px;
+    border-radius: 14px;
+    border: 1px solid rgba(33, 37, 41, 0.16);
+    overflow: hidden;
+}
+
+.map-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.map-actions .button.secondary {
+    padding: 0.7rem 1.1rem;
+}
+
+.map-status {
+    margin: 0;
+    color: var(--body-copy);
+    font-size: 0.92rem;
+}
+
+.checkline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.95rem;
+    color: var(--body-copy);
+}
+
+.checkline input[type="checkbox"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.2rem;
+    accent-color: var(--found);
+}
+
+.request-card .note ul {
+    margin: 0.4rem 0 0 1.1rem;
+    padding: 0;
+}
+
+.request-card .note li {
+    margin-bottom: 0.45rem;
+}
+
+.request-card .note li:last-child {
+    margin-bottom: 0;
 }
 
 .modal-backdrop {
@@ -916,6 +1019,14 @@ footer a:focus {
 
     .request-card .input-group {
         gap: 0.38rem;
+    }
+
+    .checkline {
+        font-size: 0.9rem;
+    }
+
+    #commerce-map {
+        height: 240px;
     }
 }
 

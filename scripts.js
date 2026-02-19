@@ -243,9 +243,359 @@
     });
   }
 
+  function initCommerceRequestForm() {
+    var form = document.getElementById('commerce-request-form');
+    if (!form) {
+      return;
+    }
+
+    var feedback = form.querySelector('#commerce-form-feedback');
+    var submitButton = form.querySelector('button[type="submit"]');
+    var endpoint = 'https://formsubmit.co/ajax/equipo@mappets.com.ar';
+
+    var fields = {
+      name: form.querySelector('#commerce-name'),
+      type: form.querySelector('#commerce-type'),
+      contact: form.querySelector('#contact-name'),
+      email: form.querySelector('#commerce-email'),
+      phone: form.querySelector('#commerce-phone'),
+      address: form.querySelector('#commerce-address'),
+      description: form.querySelector('#commerce-description'),
+      latitude: form.querySelector('#commerce-latitude'),
+      longitude: form.querySelector('#commerce-longitude'),
+      logo: form.querySelector('#commerce-logo'),
+      banner: form.querySelector('#commerce-banner'),
+      photos: form.querySelector('#commerce-photos'),
+      policy: form.querySelector('#commerce-policy')
+    };
+
+    var MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+    var MAX_PHOTOS = 3;
+
+    function isImageFile(file) {
+      return file && typeof file.type === 'string' && file.type.indexOf('image/') === 0;
+    }
+
+    function validateFiles() {
+      if (fields.logo.files.length > 0) {
+        var logoFile = fields.logo.files[0];
+        if (!isImageFile(logoFile)) {
+          return 'El logo debe ser una imagen valida.';
+        }
+        if (logoFile.size > MAX_FILE_SIZE_BYTES) {
+          return 'El logo supera el maximo de 5MB.';
+        }
+      }
+
+      if (fields.banner.files.length > 0) {
+        var bannerFile = fields.banner.files[0];
+        if (!isImageFile(bannerFile)) {
+          return 'El banner debe ser una imagen valida.';
+        }
+        if (bannerFile.size > MAX_FILE_SIZE_BYTES) {
+          return 'El banner supera el maximo de 5MB.';
+        }
+      }
+
+      if (fields.photos.files.length > MAX_PHOTOS) {
+        return 'Podes adjuntar hasta 3 fotos adicionales.';
+      }
+
+      for (var i = 0; i < fields.photos.files.length; i += 1) {
+        var photo = fields.photos.files[i];
+        if (!isImageFile(photo)) {
+          return 'Todas las fotos adicionales deben ser imagenes validas.';
+        }
+        if (photo.size > MAX_FILE_SIZE_BYTES) {
+          return 'Cada foto adicional debe pesar hasta 5MB.';
+        }
+      }
+
+      return '';
+    }
+
+    function buildMessage(data) {
+      return [
+        'Nueva solicitud de alta de comercio en Mappets',
+        '',
+        'Nombre: ' + String(data.get('commerce_name') || ''),
+        'Rubro: ' + String(data.get('commerce_type') || ''),
+        'Contacto: ' + String(data.get('contact_name') || ''),
+        'Email: ' + String(data.get('email') || ''),
+        'Telefono: ' + String(data.get('phone') || ''),
+        'WhatsApp: ' + String(data.get('whatsapp') || ''),
+        'Direccion: ' + String(data.get('address') || ''),
+        'Google Maps: ' + String(data.get('location_google') || ''),
+        'Latitud: ' + String(data.get('latitude') || ''),
+        'Longitud: ' + String(data.get('longitude') || ''),
+        'Website: ' + String(data.get('website') || ''),
+        'Instagram: ' + String(data.get('instagram') || ''),
+        'Facebook: ' + String(data.get('facebook') || ''),
+        'Horarios: ' + String(data.get('opening_hours') || ''),
+        'Adjuntos: logo=' + (data.get('logo') ? 'si' : 'no') + ', banner=' + (data.get('banner') ? 'si' : 'no') + ', fotos=' + String(data.getAll('photos').length || 0),
+        '',
+        'Descripcion:',
+        String(data.get('description') || '')
+      ].join('\n');
+    }
+
+    function buildPayload(includeFiles) {
+      var data = new FormData(form);
+      var payload = new FormData();
+
+      payload.append('_subject', 'Solicitud de alta de comercio - Mappets');
+      payload.append('form_type', 'commerce_signup_request');
+      payload.append('commerce_name', String(data.get('commerce_name') || ''));
+      payload.append('commerce_type', String(data.get('commerce_type') || ''));
+      payload.append('contact_name', String(data.get('contact_name') || ''));
+      payload.append('email', String(data.get('email') || ''));
+      payload.append('phone', String(data.get('phone') || ''));
+      payload.append('whatsapp', String(data.get('whatsapp') || ''));
+      payload.append('website', String(data.get('website') || ''));
+      payload.append('instagram', String(data.get('instagram') || ''));
+      payload.append('facebook', String(data.get('facebook') || ''));
+      payload.append('address', String(data.get('address') || ''));
+      payload.append('location_google', String(data.get('location_google') || ''));
+      payload.append('latitude', String(data.get('latitude') || ''));
+      payload.append('longitude', String(data.get('longitude') || ''));
+      payload.append('opening_hours', String(data.get('opening_hours') || ''));
+      payload.append('description', String(data.get('description') || ''));
+      payload.append('message', buildMessage(data));
+
+      if (includeFiles) {
+        if (fields.logo.files.length > 0) {
+          payload.append('logo', fields.logo.files[0], fields.logo.files[0].name);
+        }
+        if (fields.banner.files.length > 0) {
+          payload.append('banner', fields.banner.files[0], fields.banner.files[0].name);
+        }
+        for (var i = 0; i < fields.photos.files.length; i += 1) {
+          payload.append('photos', fields.photos.files[i], fields.photos.files[i].name);
+        }
+      }
+
+      return payload;
+    }
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      feedback.textContent = '';
+      feedback.classList.remove('error');
+
+      if (!fields.name.value.trim()) {
+        feedback.textContent = 'Ingresa el nombre del comercio.';
+        feedback.classList.add('error');
+        fields.name.focus();
+        return;
+      }
+
+      if (!fields.type.value.trim()) {
+        feedback.textContent = 'Selecciona el rubro del comercio.';
+        feedback.classList.add('error');
+        fields.type.focus();
+        return;
+      }
+
+      if (!fields.contact.value.trim()) {
+        feedback.textContent = 'Ingresa una persona de contacto.';
+        feedback.classList.add('error');
+        fields.contact.focus();
+        return;
+      }
+
+      if (!fields.email.value.trim() || !fields.email.checkValidity()) {
+        feedback.textContent = 'Ingresa un correo de contacto valido.';
+        feedback.classList.add('error');
+        fields.email.focus();
+        return;
+      }
+
+      if (!fields.phone.value.trim()) {
+        feedback.textContent = 'Ingresa un telefono de contacto.';
+        feedback.classList.add('error');
+        fields.phone.focus();
+        return;
+      }
+
+      if (!fields.address.value.trim()) {
+        feedback.textContent = 'Ingresa la direccion del comercio.';
+        feedback.classList.add('error');
+        fields.address.focus();
+        return;
+      }
+
+      if (!fields.description.value.trim()) {
+        feedback.textContent = 'Describe brevemente el comercio y sus servicios.';
+        feedback.classList.add('error');
+        fields.description.focus();
+        return;
+      }
+
+      if (!fields.latitude.value.trim() || !fields.longitude.value.trim()) {
+        feedback.textContent = 'Selecciona la ubicacion en el mapa para cargar latitud y longitud.';
+        feedback.classList.add('error');
+        fields.latitude.focus();
+        return;
+      }
+
+      var filesError = validateFiles();
+      if (filesError) {
+        feedback.textContent = filesError;
+        feedback.classList.add('error');
+        return;
+      }
+
+      if (!fields.policy.checked) {
+        feedback.textContent = 'Debes aceptar la validacion de datos para continuar.';
+        feedback.classList.add('error');
+        fields.policy.focus();
+        return;
+      }
+
+      var originalLabel = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Enviando...';
+
+      try {
+        var response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: buildPayload(true)
+        });
+
+        if (!response.ok) {
+          var fallbackResponse = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json'
+            },
+            body: buildPayload(false)
+          });
+          if (!fallbackResponse.ok) {
+            throw new Error('Invalid response');
+          }
+          feedback.textContent = 'Solicitud enviada. Si los adjuntos no pudieron cargarse, te pediremos logo, banner y fotos por mail.';
+          window.alert('Solicitud enviada. Si faltan adjuntos, te los pediremos por correo.');
+          form.reset();
+          return;
+        }
+
+        feedback.textContent = 'Solicitud enviada. El equipo revisara los datos y te contactara por correo.';
+        window.alert('Solicitud enviada correctamente. Te contactaremos por correo.');
+        form.reset();
+      } catch (error) {
+        feedback.textContent = 'No pudimos enviar la solicitud. Escribenos a equipo@mappets.com.ar.';
+        feedback.classList.add('error');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
+    });
+  }
+
+  function initCommerceMap() {
+    var mapContainer = document.getElementById('commerce-map');
+    var latitudeInput = document.getElementById('commerce-latitude');
+    var longitudeInput = document.getElementById('commerce-longitude');
+    var mapStatus = document.getElementById('map-status');
+    var currentLocationButton = document.getElementById('map-current-location');
+
+    if (!mapContainer || !latitudeInput || !longitudeInput) {
+      return;
+    }
+
+    if (typeof window.L === 'undefined') {
+      if (mapStatus) {
+        mapStatus.textContent = 'No pudimos cargar el mapa. Completá un link de Google Maps y el equipo validará la ubicación.';
+        mapStatus.classList.add('error');
+      }
+      return;
+    }
+
+    var defaultCoords = [-34.6037345, -58.3815704];
+    var map = window.L.map(mapContainer, {
+      scrollWheelZoom: true,
+      touchZoom: true,
+      doubleClickZoom: true,
+      boxZoom: true,
+      keyboard: true,
+      dragging: true,
+      zoomControl: true
+    }).setView(defaultCoords, 11);
+    window.__mappetsCommerceMap = map;
+
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var marker = null;
+
+    function setPoint(lat, lng) {
+      var fixedLat = Number(lat).toFixed(7);
+      var fixedLng = Number(lng).toFixed(7);
+      latitudeInput.value = fixedLat;
+      longitudeInput.value = fixedLng;
+
+      if (!marker) {
+        marker = window.L.marker([fixedLat, fixedLng]).addTo(map);
+      } else {
+        marker.setLatLng([fixedLat, fixedLng]);
+      }
+
+      if (mapStatus) {
+        mapStatus.textContent = 'Ubicacion seleccionada: lat ' + fixedLat + ', lng ' + fixedLng + '.';
+        mapStatus.classList.remove('error');
+      }
+    }
+
+    map.on('click', function (event) {
+      setPoint(event.latlng.lat, event.latlng.lng);
+    });
+
+    if (currentLocationButton && navigator.geolocation) {
+      currentLocationButton.addEventListener('click', function () {
+        currentLocationButton.disabled = true;
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            map.flyTo([lat, lng], 15);
+            setPoint(lat, lng);
+            currentLocationButton.disabled = false;
+          },
+          function () {
+            if (mapStatus) {
+              mapStatus.textContent = 'No pudimos obtener tu ubicacion actual. Selecciona el punto manualmente en el mapa.';
+              mapStatus.classList.add('error');
+            }
+            currentLocationButton.disabled = false;
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000
+          }
+        );
+      });
+    }
+
+    if (latitudeInput.value && longitudeInput.value) {
+      setPoint(latitudeInput.value, longitudeInput.value);
+      map.setView([Number(latitudeInput.value), Number(longitudeInput.value)], 15);
+    }
+
+    setTimeout(function () {
+      map.invalidateSize();
+    }, 120);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initNavigation();
     initDeletionForm();
     initSupportForm();
+    initCommerceRequestForm();
+    initCommerceMap();
   });
 })();

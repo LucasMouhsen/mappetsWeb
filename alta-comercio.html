@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappets | Alta de comercios</title>
+    <meta name="description" content="Solicita el alta de tu veterinaria, petshop o comercio aliado en Mappets.">
+    <meta name="theme-color" content="#f4be4c">
+    <meta name="robots" content="index,follow">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+    <header>
+        <div class="layout">
+            <a class="brand" href="index.html" aria-label="Ir al inicio">
+                <img class="brand-logo" src="logo-app.png" alt="Logo de Mappets">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
+                <span class="nav-toggle-icon" aria-hidden="true"></span>
+            </button>
+            <nav id="main-nav" aria-label="Menú principal" data-open="false">
+                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="index.html#donaciones">Donaciones</a>
+                <a class="nav-link" href="privacidad.html">Política de privacidad</a>
+                <a class="nav-link" href="terminos.html">Términos y condiciones</a>
+                <a class="nav-link" href="aviso-legal.html">Aviso legal</a>
+                <a class="nav-link" href="soporte.html">Soporte</a>
+                <a class="nav-link" aria-current="page" href="alta-comercio.html">Alta de comercios</a>
+                <a class="nav-link" href="solicitud-eliminacion.html">Eliminar datos</a>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content">
+        <section class="hero" aria-labelledby="alta-comercio-titulo">
+            <small>Comercios aliados</small>
+            <h1 id="alta-comercio-titulo">Solicitá el alta de tu comercio en Mappets</h1>
+            <p>Si tenés una veterinaria, petshop, guardería u otro servicio para mascotas, podés postularte desde este formulario. El alta no es automática: nuestro equipo revisa cada solicitud antes de activarla.</p>
+        </section>
+
+        <section class="request-card" aria-labelledby="formulario-comercio-titulo">
+            <h2 id="formulario-comercio-titulo">Formulario de solicitud</h2>
+            <p>Pedimos esta información para poder crear el comercio con los datos necesarios en el sistema una vez aprobado.</p>
+            <form class="request-form" id="commerce-request-form" novalidate>
+                <div class="row">
+                    <div class="input-group">
+                        <label for="commerce-name">Nombre del comercio</label>
+                        <input id="commerce-name" name="commerce_name" type="text" autocomplete="organization" placeholder="Ej: Veterinaria San Martín" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="commerce-type">Rubro</label>
+                        <select id="commerce-type" name="commerce_type" required>
+                            <option value="">Seleccioná un rubro</option>
+                            <option value="Veterinaria">Veterinaria</option>
+                            <option value="Petshop">Petshop</option>
+                            <option value="Peluqueria">Peluquería</option>
+                            <option value="Guarderia">Guardería</option>
+                            <option value="Servicios">Servicios</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="contact-name">Persona de contacto</label>
+                        <input id="contact-name" name="contact_name" type="text" autocomplete="name" placeholder="Nombre y apellido" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="commerce-email">Correo de contacto</label>
+                        <input id="commerce-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="equipo@tucomercio.com" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="commerce-phone">Teléfono</label>
+                        <input id="commerce-phone" name="phone" type="tel" autocomplete="tel" placeholder="Ej: +54 11 1234 5678" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="commerce-whatsapp">WhatsApp (opcional)</label>
+                        <input id="commerce-whatsapp" name="whatsapp" type="tel" autocomplete="tel-national" placeholder="Ej: +54 11 1234 5678">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="commerce-address">Dirección</label>
+                        <input id="commerce-address" name="address" type="text" autocomplete="street-address" placeholder="Calle, altura, localidad" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="commerce-location">Link de Google Maps (opcional)</label>
+                        <input id="commerce-location" name="location_google" type="url" placeholder="https://maps.google.com/...">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="commerce-website">Sitio web (opcional)</label>
+                        <input id="commerce-website" name="website" type="url" placeholder="https://tucomercio.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="commerce-instagram">Instagram (opcional)</label>
+                        <input id="commerce-instagram" name="instagram" type="text" placeholder="@tucomercio">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="commerce-facebook">Facebook (opcional)</label>
+                        <input id="commerce-facebook" name="facebook" type="text" placeholder="facebook.com/tucomercio">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="commerce-description">Descripción del comercio</label>
+                    <textarea id="commerce-description" name="description" placeholder="Contanos qué servicios ofrecen, zona de cobertura y valor diferencial" required></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="commerce-hours">Horarios de atención</label>
+                    <textarea id="commerce-hours" name="opening_hours" placeholder="Ej: Lun a Vie 9:00 a 19:00 | Sáb 9:00 a 13:00"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="commerce-logo">Logo del comercio</label>
+                    <input id="commerce-logo" name="logo" type="file" accept="image/*">
+                </div>
+
+                <div class="input-group">
+                    <label for="commerce-banner">Banner del comercio (opcional)</label>
+                    <input id="commerce-banner" name="banner" type="file" accept="image/*">
+                </div>
+
+                <div class="input-group">
+                    <label for="commerce-photos">Fotos adicionales (opcional, hasta 3)</label>
+                    <input id="commerce-photos" name="photos" type="file" accept="image/*" multiple>
+                </div>
+
+                <section class="map-block" aria-labelledby="map-title">
+                    <h3 id="map-title">Ubicación en mapa</h3>
+                    <p class="muted">Tocá/clickeá el punto exacto de tu comercio para cargar latitud y longitud automáticamente. También podés hacer zoom con rueda del mouse, doble clic o gesto de pellizcar en móvil.</p>
+                    <div id="commerce-map" role="application" aria-label="Mapa para seleccionar ubicación"></div>
+                    <div class="map-actions">
+                        <button type="button" class="button secondary" id="map-current-location">Usar mi ubicación actual</button>
+                    </div>
+                    <p class="map-status" id="map-status" role="status" aria-live="polite">Aún no seleccionaste ubicación en el mapa.</p>
+                </section>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="commerce-latitude">Latitud</label>
+                        <input id="commerce-latitude" name="latitude" type="text" inputmode="decimal" readonly required>
+                    </div>
+                    <div class="input-group">
+                        <label for="commerce-longitude">Longitud</label>
+                        <input id="commerce-longitude" name="longitude" type="text" inputmode="decimal" readonly required>
+                    </div>
+                </div>
+
+                <label class="checkline" for="commerce-policy">
+                    <input id="commerce-policy" name="policy" type="checkbox" required>
+                    Confirmo que la información enviada es real y autorizo a Mappets a contactarme para validar la solicitud.
+                </label>
+
+                <button class="button" type="submit">Enviar solicitud de alta</button>
+                <p class="feedback" id="commerce-form-feedback" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="note">
+                <p><strong>Importante:</strong> completar este formulario no activa el comercio automáticamente.</p>
+                <p><strong>Costo actual:</strong> la solicitud de alta es gratuita. Este esquema puede cambiar en el futuro y, si sucede, lo comunicaremos previamente.</p>
+                <ul>
+                    <li>Revisión del equipo de Mappets.</li>
+                    <li>Contacto para validar datos y categoría.</li>
+                    <li>Alta manual en la app una vez aprobada la solicitud.</li>
+                    <li>Si tu cliente de correo/navegador bloquea adjuntos, el equipo solicitará logo, banner y fotos por mail.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="layout">
+            <p>© 2025 Mappets. Cuidando a quienes nos cuidan.</p>
+            <a href="privacidad.html">Políticas de privacidad</a>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="scripts.js" defer></script>
+</body>
+</html>
