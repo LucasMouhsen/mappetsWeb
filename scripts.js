@@ -263,56 +263,8 @@
       description: form.querySelector('#commerce-description'),
       latitude: form.querySelector('#commerce-latitude'),
       longitude: form.querySelector('#commerce-longitude'),
-      logo: form.querySelector('#commerce-logo'),
-      banner: form.querySelector('#commerce-banner'),
-      photos: form.querySelector('#commerce-photos'),
       policy: form.querySelector('#commerce-policy')
     };
-
-    var MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
-    var MAX_PHOTOS = 3;
-
-    function isImageFile(file) {
-      return file && typeof file.type === 'string' && file.type.indexOf('image/') === 0;
-    }
-
-    function validateFiles() {
-      if (fields.logo.files.length > 0) {
-        var logoFile = fields.logo.files[0];
-        if (!isImageFile(logoFile)) {
-          return 'El logo debe ser una imagen valida.';
-        }
-        if (logoFile.size > MAX_FILE_SIZE_BYTES) {
-          return 'El logo supera el maximo de 5MB.';
-        }
-      }
-
-      if (fields.banner.files.length > 0) {
-        var bannerFile = fields.banner.files[0];
-        if (!isImageFile(bannerFile)) {
-          return 'El banner debe ser una imagen valida.';
-        }
-        if (bannerFile.size > MAX_FILE_SIZE_BYTES) {
-          return 'El banner supera el maximo de 5MB.';
-        }
-      }
-
-      if (fields.photos.files.length > MAX_PHOTOS) {
-        return 'Podes adjuntar hasta 3 fotos adicionales.';
-      }
-
-      for (var i = 0; i < fields.photos.files.length; i += 1) {
-        var photo = fields.photos.files[i];
-        if (!isImageFile(photo)) {
-          return 'Todas las fotos adicionales deben ser imagenes validas.';
-        }
-        if (photo.size > MAX_FILE_SIZE_BYTES) {
-          return 'Cada foto adicional debe pesar hasta 5MB.';
-        }
-      }
-
-      return '';
-    }
 
     function buildMessage(data) {
       return [
@@ -332,14 +284,14 @@
         'Instagram: ' + String(data.get('instagram') || ''),
         'Facebook: ' + String(data.get('facebook') || ''),
         'Horarios: ' + String(data.get('opening_hours') || ''),
-        'Adjuntos: logo=' + (data.get('logo') ? 'si' : 'no') + ', banner=' + (data.get('banner') ? 'si' : 'no') + ', fotos=' + String(data.getAll('photos').length || 0),
+        'Imagenes: se solicitaran por correo durante la validacion.',
         '',
         'Descripcion:',
         String(data.get('description') || '')
       ].join('\n');
     }
 
-    function buildPayload(includeFiles) {
+    function buildPayload() {
       var data = new FormData(form);
       var payload = new FormData();
 
@@ -361,18 +313,6 @@
       payload.append('opening_hours', String(data.get('opening_hours') || ''));
       payload.append('description', String(data.get('description') || ''));
       payload.append('message', buildMessage(data));
-
-      if (includeFiles) {
-        if (fields.logo.files.length > 0) {
-          payload.append('logo', fields.logo.files[0], fields.logo.files[0].name);
-        }
-        if (fields.banner.files.length > 0) {
-          payload.append('banner', fields.banner.files[0], fields.banner.files[0].name);
-        }
-        for (var i = 0; i < fields.photos.files.length; i += 1) {
-          payload.append('photos', fields.photos.files[i], fields.photos.files[i].name);
-        }
-      }
 
       return payload;
     }
@@ -439,13 +379,6 @@
         return;
       }
 
-      var filesError = validateFiles();
-      if (filesError) {
-        feedback.textContent = filesError;
-        feedback.classList.add('error');
-        return;
-      }
-
       if (!fields.policy.checked) {
         feedback.textContent = 'Debes aceptar la validacion de datos para continuar.';
         feedback.classList.add('error');
@@ -463,24 +396,11 @@
           headers: {
             Accept: 'application/json'
           },
-          body: buildPayload(true)
+          body: buildPayload()
         });
 
         if (!response.ok) {
-          var fallbackResponse = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json'
-            },
-            body: buildPayload(false)
-          });
-          if (!fallbackResponse.ok) {
-            throw new Error('Invalid response');
-          }
-          feedback.textContent = 'Solicitud enviada. Si los adjuntos no pudieron cargarse, te pediremos logo, banner y fotos por mail.';
-          window.alert('Solicitud enviada. Si faltan adjuntos, te los pediremos por correo.');
-          form.reset();
-          return;
+          throw new Error('Invalid response');
         }
 
         feedback.textContent = 'Solicitud enviada. El equipo revisara los datos y te contactara por correo.';
