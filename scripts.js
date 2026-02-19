@@ -399,15 +399,37 @@
           body: buildPayload()
         });
 
+        var result = null;
+        try {
+          result = await response.json();
+        } catch (parseError) {
+          result = null;
+        }
+
         if (!response.ok) {
-          throw new Error('Invalid response');
+          throw new Error('HTTP_ERROR');
+        }
+
+        if (!result || String(result.success || '').toLowerCase() !== 'true') {
+          var externalMessage = result && result.message ? String(result.message) : '';
+          if (externalMessage) {
+            throw new Error(externalMessage);
+          }
+          throw new Error('FORMSUBMIT_REJECTED');
         }
 
         feedback.textContent = 'Solicitud enviada. El equipo revisara los datos y te contactara por correo.';
         window.alert('Solicitud enviada correctamente. Te contactaremos por correo.');
         form.reset();
       } catch (error) {
-        feedback.textContent = 'No pudimos enviar la solicitud. Escribenos a equipo@mappets.com.ar.';
+        var errorMessage = error && error.message ? String(error.message) : '';
+        if (/needs Activation|Activate Form|actived/i.test(errorMessage)) {
+          feedback.textContent = 'El formulario requiere activacion en FormSubmit. Revisen el correo de equipo@mappets.com.ar y confirmen "Activate Form".';
+        } else if (/open this page through a web server|browsed as HTML files/i.test(errorMessage)) {
+          feedback.textContent = 'Este formulario no funciona en archivos locales. Debe abrirse desde https://mappets.com.ar o un servidor web.';
+        } else {
+          feedback.textContent = 'No pudimos enviar la solicitud. Escribenos a equipo@mappets.com.ar.';
+        }
         feedback.classList.add('error');
       } finally {
         submitButton.disabled = false;
