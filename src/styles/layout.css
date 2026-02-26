@@ -1,0 +1,221 @@
+.site-header {
+  background: linear-gradient(130deg, var(--brand) 0%, #ffd581 45%, #ffe7ae 100%);
+  border-bottom: 1px solid rgba(33, 37, 41, 0.12);
+  box-shadow: 0 18px 40px rgba(33, 37, 41, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(6px);
+}
+
+.layout {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.site-header .layout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-logo {
+  height: clamp(52px, 8vw, 82px);
+  width: auto;
+  filter: drop-shadow(0 12px 18px rgba(33, 37, 41, 0.16));
+}
+
+.header-right {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-1);
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-1);
+  border-radius: 999px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 24px rgba(33, 37, 41, 0.12);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link {
+  color: var(--nav-active);
+  font-weight: 700;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0.46rem 0.7rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background: rgba(33, 37, 41, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav-link[aria-current="page"] {
+  background: #ffffff;
+  color: var(--nav-active);
+  box-shadow: 0 8px 20px rgba(33, 37, 41, 0.15);
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--control-h);
+  min-height: var(--control-h);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.nav-toggle-icon {
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ink);
+  position: relative;
+  box-shadow: 0 -6px 0 var(--ink), 0 6px 0 var(--ink);
+}
+
+.page-main {
+  padding: 3.2rem 1.25rem 5rem;
+}
+
+.header-auth {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+footer {
+  background: var(--footer-bg);
+  border-top: 1px solid rgba(33, 37, 41, 0.1);
+}
+
+footer::before {
+  content: "";
+  display: block;
+  height: 5px;
+  background: linear-gradient(90deg, var(--brand), var(--adoption), var(--found), var(--foster));
+}
+
+footer .layout {
+  flex-wrap: wrap;
+  row-gap: 0.75rem;
+}
+
+footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+footer a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .site-header .layout {
+    grid-template-columns: auto auto;
+  }
+
+  .header-right {
+    grid-column: 1 / -1;
+    width: 100%;
+    gap: var(--space-2);
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 18px;
+    box-shadow: none;
+    background: transparent;
+    border-color: transparent;
+    transition: max-height 0.25s ease;
+  }
+
+  nav[data-open="true"] {
+    max-height: 640px;
+    padding: var(--space-2);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .header-auth {
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-main {
+    padding: 3.2rem 1.1rem 4rem;
+  }
+}

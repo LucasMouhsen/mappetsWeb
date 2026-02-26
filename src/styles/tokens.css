@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --control-h: 44px;
+  --control-h-sm: 38px;
+  --brand: #f4be4c;
+  --brand-deep: #e7a42f;
+  --brand-ink: #7a4f00;
+  --brand-soft: #fff1cf;
+  --footer-bg: #f3f3f3;
+  --ink: #212529;
+  --muted: #69707a;
+  --body-copy: #5e6670;
+  --header-title: #ffffff;
+  --nav-active: #212529;
+  --surface-alt: #fff8e8;
+  --divider: rgba(33, 37, 41, 0.12);
+  --shadow-soft: 0 14px 32px rgba(33, 37, 41, 0.12);
+  --shadow-strong: 0 30px 70px rgba(33, 37, 41, 0.16);
+  --lost: #ff3b30;
+  --found: #007aff;
+  --adoption: #ff9500;
+  --foster: #4cd964;
+  --success: #4cd964;
+  --error: #ff3b30;
+  --glass: rgba(255, 255, 255, 0.74);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --ring-strong: 0 0 0 4px rgba(0, 122, 255, 0.22);
+}
