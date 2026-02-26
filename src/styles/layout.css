@@ -18,9 +18,12 @@
   gap: var(--space-5);
 }
 
-.site-header .layout {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+.site-header-main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-3);
   align-items: center;
   padding-top: var(--space-3);
   padding-bottom: var(--space-3);
@@ -30,6 +33,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  z-index: 1;
 }
 
 .brand-logo {
@@ -38,21 +42,15 @@
   filter: drop-shadow(0 12px 18px rgba(33, 37, 41, 0.16));
 }
 
-.header-right {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
 nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: var(--space-1);
-  flex-wrap: nowrap;
-  width: 100%;
-  max-width: 100%;
+  width: fit-content;
   padding: var(--space-1);
   border-radius: 999px;
   background: var(--glass);
@@ -65,6 +63,19 @@ nav {
 
 nav::-webkit-scrollbar {
   display: none;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.nav-list li {
+  display: flex;
 }
 
 .nav-link {
@@ -116,12 +127,16 @@ nav::-webkit-scrollbar {
   padding: 3.2rem 1.25rem 5rem;
 }
 
-.header-auth {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--space-2);
-  flex-wrap: wrap;
+.admin-strip {
+  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 1px solid rgba(33, 37, 41, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.admin-strip-layout {
+  justify-content: center;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
 }
 
 footer {
@@ -171,26 +186,45 @@ footer a:focus {
     flex-wrap: wrap;
   }
 
-  .site-header .layout {
+  .site-header-main {
+    display: grid;
+    position: static;
     grid-template-columns: auto auto;
-  }
-
-  .header-right {
-    grid-column: 1 / -1;
     width: 100%;
     gap: var(--space-2);
+  }
+
+  .brand {
+    justify-self: start;
+  }
+
+  nav {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .nav-list {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .admin-strip-layout {
+    width: 100%;
   }
 
   .nav-toggle {
     display: inline-flex;
     margin-left: auto;
+    justify-self: end;
   }
 
   nav {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
     max-height: 0;
     overflow: hidden;
     padding: 0;
@@ -208,9 +242,11 @@ footer a:focus {
     border-color: rgba(255, 255, 255, 0.6);
   }
 
-  .header-auth {
-    justify-content: flex-start;
+  nav[data-open="true"] .nav-list {
+    flex-direction: column;
     width: 100%;
+    align-items: flex-start;
+    gap: var(--space-2);
   }
 }
 

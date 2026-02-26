@@ -48,7 +48,7 @@ function SiteLayout({ current, children, auth, adminAuth, onLogout, onAdminLogou
         Saltar al contenido principal
       </a>
       <header className="site-header">
-        <div className="layout">
+        <div className="layout site-header-main">
           <a className="brand" href="/" aria-label="Ir al inicio">
             <img className="brand-logo" src="/logo-app.png" alt="Logo de Mappets" />
           </a>
@@ -62,8 +62,8 @@ function SiteLayout({ current, children, auth, adminAuth, onLogout, onAdminLogou
           >
             <span className="nav-toggle-icon" aria-hidden="true" />
           </button>
-          <div className="header-right">
-            <nav id="main-nav" aria-label="Menu principal" data-open={menuOpen}>
+          <nav id="main-nav" aria-label="Menu principal" data-open={menuOpen}>
+            <ul className="nav-list">
               {navLinks.map((link) => {
                 const isHome = current === "inicio";
                 const donationsActive = isHome && hash === "#donaciones";
@@ -76,52 +76,55 @@ function SiteLayout({ current, children, auth, adminAuth, onLogout, onAdminLogou
                         ? link.activeKeys.includes(current)
                         : link.key === current;
                 return (
-                  <a
-                    key={link.key}
-                    className="nav-link"
-                    aria-current={isCurrent ? "page" : undefined}
-                    href={link.href}
-                    onClick={handleLinkClick}
-                  >
-                    {link.label}
-                  </a>
+                  <li key={link.key}>
+                    <a
+                      className="nav-link"
+                      aria-current={isCurrent ? "page" : undefined}
+                      href={link.href}
+                      onClick={handleLinkClick}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
                 );
               })}
-            </nav>
-            {auth?.user || adminAuth?.token ? (
-              <div className="header-auth">
-                <div className="auth-actions">
-                  <a className="button secondary auth-link" href="/mi-cuenta">
-                    <span aria-hidden="true">👤</span>
-                    <span>Mi cuenta</span>
-                  </a>
-                  {adminAuth?.token ? (
-                    <>
-                      <a className="button secondary auth-link" href="/admin/reports">
-                        <span aria-hidden="true">📊</span>
-                        <span>Reportes</span>
-                      </a>
-                      <a className="button secondary auth-link" href="/admin/comercios">
-                        <span aria-hidden="true">🏪</span>
-                        <span>Comercios</span>
-                      </a>
-                      <button type="button" className="button secondary auth-link" onClick={onAdminLogout}>
-                        <span aria-hidden="true">⎋</span>
-                        <span>Cerrar admin</span>
-                      </button>
-                    </>
-                  ) : (
-                    <button type="button" className="button secondary auth-link" onClick={onLogout}>
-                      <span aria-hidden="true">⎋</span>
-                      <span>Cerrar sesion</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-            ) : null}
-          </div>
+            </ul>
+          </nav>
         </div>
       </header>
+      {auth?.user || adminAuth?.token ? (
+        <section className="admin-strip" aria-label="Accesos de sesion">
+          <div className="layout admin-strip-layout">
+            <div className="auth-actions">
+              <a className="button secondary auth-link" href="/mi-cuenta">
+                <span aria-hidden="true">👤</span>
+                <span>Mi cuenta</span>
+              </a>
+              {adminAuth?.token ? (
+                <>
+                  <a className="button secondary auth-link" href="/admin/reports">
+                    <span aria-hidden="true">📊</span>
+                    <span>Reportes</span>
+                  </a>
+                  <a className="button secondary auth-link" href="/admin/comercios">
+                    <span aria-hidden="true">🏪</span>
+                    <span>Comercios</span>
+                  </a>
+                  <button type="button" className="button secondary auth-link" onClick={onAdminLogout}>
+                    <span aria-hidden="true">⎋</span>
+                    <span>Cerrar admin</span>
+                  </button>
+                </>
+              ) : (
+                <button type="button" className="button secondary auth-link" onClick={onLogout}>
+                  <span aria-hidden="true">⎋</span>
+                  <span>Cerrar sesion</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </section>
+      ) : null}
       <main id="main-content" className="page-main">
         {children}
       </main>

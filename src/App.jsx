@@ -13,10 +13,9 @@ import AccountPage from "./pages/AccountPage";
 import AdminReportsPage from "./pages/AdminReportsPage";
 import AdminCommercesPage from "./pages/AdminCommercesPage";
 import {
-  clearStoredToken,
   fetchProfile,
   getStoredToken,
-  storeToken
+  clearStoredToken
 } from "./services/authApi";
 import {
   clearStoredAdminToken,
@@ -167,13 +166,16 @@ function App() {
   const loginAdmin = useCallback(async ({ email, password }) => {
     const token = await loginAdminWithEmailPassword(email, password);
     storeAdminToken(token);
-    storeToken(token);
-    await loadProfileFromToken(token);
+    try {
+      await loadProfileFromToken(token);
+    } catch {
+      // Si el backend no permite perfil con token admin, mantenemos el panel admin operativo.
+    }
     setAdminAuth({
       token,
       loading: false
     });
-    window.location.href = "/admin/reports";
+    window.location.href = "/mi-cuenta";
   }, [loadProfileFromToken]);
 
   useEffect(() => {
@@ -208,6 +210,12 @@ function App() {
       loading: false
     });
   }, []);
+
+  useEffect(() => {
+    if (!adminAuth?.token) return;
+    if (auth?.user) return;
+    loadProfileFromToken(adminAuth.token).catch(() => {});
+  }, [adminAuth?.token, auth?.user, loadProfileFromToken]);
 
   useEffect(() => {
     if (!window.location.hash) {

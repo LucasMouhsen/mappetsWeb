@@ -7,9 +7,25 @@ function resolveProfileImage(userPicture) {
   return `${API_BASE_URL}/public/images/${encodeURIComponent(userPicture)}`;
 }
 
-function AccountPage({ auth }) {
+function decodeJwtPayload(token) {
+  if (!token || typeof token !== "string") return null;
+  const parts = token.split(".");
+  if (parts.length < 2) return null;
+  try {
+    const normalized = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
+    return JSON.parse(atob(padded));
+  } catch {
+    return null;
+  }
+}
+
+function AccountPage({ auth, adminAuth }) {
   const [imageError, setImageError] = useState(false);
   const user = auth?.user || null;
+  const adminClaims = useMemo(() => decodeJwtPayload(adminAuth?.token), [adminAuth?.token]);
+  const adminEmail = adminClaims?.email || adminClaims?.sub || "-";
+  const adminRole = adminClaims?.role || adminClaims?.roles || "admin";
   const fullName = `${user?.firstName || ""} ${user?.lastName || ""}`.trim();
   const initials = useMemo(() => {
     const name = fullName || user?.email || "M";
@@ -21,7 +37,7 @@ function AccountPage({ auth }) {
   }, [user?.email, fullName]);
   const pictureUrl = resolveProfileImage(user?.userPicture);
 
-  if (auth.loading) {
+  if (auth.loading || adminAuth?.loading) {
     return (
       <section className="request-card auth-card">
         <h1>Cargando cuenta...</h1>
@@ -29,11 +45,11 @@ function AccountPage({ auth }) {
     );
   }
 
-  if (!auth.user) {
+  if (!adminAuth?.token) {
     return (
       <section className="request-card auth-card">
         <h1>Sin sesion activa</h1>
-        <p>Para ver tu cuenta primero debes iniciar sesion ingresando manualmente a `/admin/login`.</p>
+        <p>Para ver tu cuenta debes iniciar sesion en `/admin/login`.</p>
       </section>
     );
   }
@@ -42,8 +58,8 @@ function AccountPage({ auth }) {
     <>
       <section className="hero">
         <small>Mi cuenta</small>
-        <h1>Sesion activa</h1>
-        <p>Esta informacion se obtiene desde `DogWalker-backend` usando tu token JWT.</p>
+        <h1>Sesion admin activa</h1>
+        <p>Panel de cuenta administrativa para acceso a reportes y comercios.</p>
       </section>
 
       <section className="request-card auth-card account-card" aria-labelledby="cuenta-titulo">
@@ -51,7 +67,7 @@ function AccountPage({ auth }) {
         <div className="account-grid account-grid--profile">
           <div className="card-inline account-avatar-card">
             <div className="account-avatar-wrap">
-              {!imageError && pictureUrl ? (
+              {!imageError && pictureUrl && user ? (
                 <img
                   className="account-avatar"
                   src={pictureUrl}
@@ -60,22 +76,38 @@ function AccountPage({ auth }) {
                 />
               ) : (
                 <div className="account-avatar account-avatar--fallback" aria-hidden="true">
-                  {initials}
+                  {user ? initials : "AD"}
                 </div>
               )}
             </div>
-            <p className="account-name">{fullName || "Usuario Mappets"}</p>
+            <p className="account-name">{fullName || "Administrador Mappets"}</p>
           </div>
           <div className="card-inline account-data-card">
-            <p>
-              <strong>Nombre:</strong> {auth.user.firstName || "-"}
-            </p>
-            <p>
-              <strong>Apellido:</strong> {auth.user.lastName || "-"}
-            </p>
-            <p>
-              <strong>Email:</strong> {auth.user.email || "-"}
-            </p>
+            {user ? (
+              <>
+                <p>
+                  <strong>Nombre:</strong> {user.firstName || "-"}
+                </p>
+                <p>
+                  <strong>Apellido:</strong> {user.lastName || "-"}
+                </p>
+                <p>
+                  <strong>Email:</strong> {user.email || "-"}
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  <strong>Rol:</strong> {Array.isArray(adminRole) ? adminRole.join(", ") : String(adminRole)}
+                </p>
+                <p>
+                  <strong>Email/ID:</strong> {adminEmail}
+                </p>
+                <p>
+                  <strong>Estado:</strong> Activa
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>
