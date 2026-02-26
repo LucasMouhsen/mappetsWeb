@@ -9,9 +9,14 @@ function CommerceMap({ lat, lng, onPointSelected }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
+  const onPointSelectedRef = useRef(onPointSelected);
   const [mapReady, setMapReady] = useState(true);
   const [status, setStatus] = useState("Aun no seleccionaste ubicacion en el mapa.");
   const [locating, setLocating] = useState(false);
+
+  useEffect(() => {
+    onPointSelectedRef.current = onPointSelected;
+  }, [onPointSelected]);
 
   useEffect(() => {
     let mounted = true;
@@ -53,7 +58,7 @@ function CommerceMap({ lat, lng, onPointSelected }) {
             markerRef.current.setLatLng([latValue, lngValue]);
           }
           setStatus(`Ubicacion seleccionada: lat ${latValue.toFixed(7)}, lng ${lngValue.toFixed(7)}.`);
-          onPointSelected(latValue, lngValue);
+          onPointSelectedRef.current?.(latValue, lngValue);
         });
 
         mapInstanceRef.current = map;
@@ -75,10 +80,16 @@ function CommerceMap({ lat, lng, onPointSelected }) {
     return () => {
       mounted = false;
       if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
+        try {
+          mapInstanceRef.current.remove();
+        } catch {
+          // Avoid runtime crashes if the map instance is already disposed.
+        }
+        mapInstanceRef.current = null;
+        markerRef.current = null;
       }
     };
-  }, [onPointSelected]);
+  }, []);
 
   useEffect(() => {
     async function syncMarker() {
@@ -118,7 +129,7 @@ function CommerceMap({ lat, lng, onPointSelected }) {
         const latValue = position.coords.latitude;
         const lngValue = position.coords.longitude;
         mapInstanceRef.current.flyTo([latValue, lngValue], 15);
-        onPointSelected(latValue, lngValue);
+        onPointSelectedRef.current?.(latValue, lngValue);
         setLocating(false);
       },
       () => {

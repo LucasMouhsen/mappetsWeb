@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CommerceMap from "../components/CommerceMap";
 
 const endpoint = "https://formsubmit.co/ajax/equipo@mappets.com.ar";
@@ -40,13 +40,13 @@ function CommerceSignupPage() {
     }));
   };
 
-  const onPointSelected = (lat, lng) => {
+  const onPointSelected = useCallback((lat, lng) => {
     setForm((prev) => ({
       ...prev,
       latitude: toFixedCoord(lat),
       longitude: toFixedCoord(lng)
     }));
-  };
+  }, []);
 
   const validationMessage = useMemo(() => {
     if (!form.commerce_name.trim()) return "Ingresa el nombre del comercio.";
@@ -428,5 +428,4 @@ function CommerceSignupPage() {
 }
 
 export default CommerceSignupPage;
-
 
