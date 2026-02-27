@@ -18,6 +18,37 @@
         </div>
       </section>
 
+      <section className="store-downloads" aria-labelledby="descarga-app-titulo">
+        <p className="kicker">Disponible ahora</p>
+        <h2 id="descarga-app-titulo">Descarga Mappets en Android y iPhone</h2>
+        <p className="intro">
+          Ya podes instalar la app desde Google Play o App Store y sumarte a la comunidad desde tu
+          celular.
+        </p>
+        <div className="store-buttons" role="list" aria-label="Tiendas disponibles">
+          <a
+            className="store-button"
+            href="https://play.google.com/store/apps/details?id=com.lucasmouhsen.mappets"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar Mappets en Google Play"
+            role="listitem"
+          >
+            <img src="/badges/google-play-badge.svg" alt="Disponible en Google Play" />
+          </a>
+          <a
+            className="store-button"
+            href="https://apps.apple.com/ar/app/mappets/id6753775813"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar Mappets en App Store"
+            role="listitem"
+          >
+            <img src="/badges/app-store-badge.svg" alt="Descargar en App Store" />
+          </a>
+        </div>
+      </section>
+
       <section className="highlights" aria-label="Funciones principales de Mappets">
         <article>
           <h2>Mapas en tiempo real</h2>
