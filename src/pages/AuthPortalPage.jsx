@@ -37,7 +37,7 @@ function AuthPortalPage({ adminAuth, onAdminLogin }) {
       <section className="hero">
         <small>Panel administrativo</small>
         <h1>Acceso de soporte</h1>
-        <p>Inicia sesion para gestionar reportes y comercios desde el panel admin.</p>
+        <p>Inicia sesion para gestionar reportes, comercios y refugios desde el panel admin.</p>
         {adminAuth?.token ? (
           <p className="muted">
             Ya hay una sesion admin activa. Puedes volver a iniciar sesion con otra cuenta si lo

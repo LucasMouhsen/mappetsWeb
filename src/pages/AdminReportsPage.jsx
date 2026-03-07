@@ -157,6 +157,9 @@ function AdminReportsPage({ adminAuth }) {
           <a className="button secondary" href="/admin/comercios">
             Ir a comercios
           </a>
+          <a className="button secondary" href="/admin/refugios">
+            Ir a refugios
+          </a>
         </div>
       </section>
 

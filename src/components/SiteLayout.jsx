@@ -110,6 +110,10 @@ function SiteLayout({ current, children, auth, adminAuth, onLogout, onAdminLogou
                     <span aria-hidden="true">🏪</span>
                     <span>Comercios</span>
                   </a>
+                  <a className="button secondary auth-link" href="/admin/refugios">
+                    <span aria-hidden="true">🏡</span>
+                    <span>Refugios</span>
+                  </a>
                   <button type="button" className="button secondary auth-link" onClick={onAdminLogout}>
                     <span aria-hidden="true">⎋</span>
                     <span>Cerrar admin</span>

@@ -515,6 +515,9 @@ function AdminCommercesPage({ adminAuth }) {
           <a className="button secondary" href="/admin/reports">
             Ir a reportes
           </a>
+          <a className="button secondary" href="/admin/refugios">
+            Ir a refugios
+          </a>
         </div>
       </section>
 

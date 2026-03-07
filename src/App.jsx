@@ -12,6 +12,7 @@ import AuthPortalPage from "./pages/AuthPortalPage";
 import AccountPage from "./pages/AccountPage";
 import AdminReportsPage from "./pages/AdminReportsPage";
 import AdminCommercesPage from "./pages/AdminCommercesPage";
+import AdminSheltersPage from "./pages/AdminSheltersPage";
 import {
   fetchProfile,
   getStoredToken,
@@ -101,6 +102,12 @@ const routeConfig = {
     title: "Mappets | Panel de comercios",
     description: "Panel administrativo para crear y gestionar comercios aliados.",
     component: AdminCommercesPage
+  },
+  "/admin/refugios": {
+    key: "admin-refugios",
+    title: "Mappets | Panel de refugios",
+    description: "Panel administrativo para gestionar solicitudes y estados de refugios.",
+    component: AdminSheltersPage
   }
 };
 
