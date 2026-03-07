@@ -430,11 +430,12 @@
   inset: 0;
   background: rgba(17, 17, 17, 0.55);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.2rem 1rem;
   z-index: 1000;
   backdrop-filter: blur(2px);
+  overflow-y: auto;
 }
 
 .modal-backdrop[hidden] {
@@ -653,6 +654,21 @@ details.faq + details.faq {
 
 .admin-modal {
   max-width: 680px;
+  max-height: min(92vh, calc(100vh - 2.4rem));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.admin-modal .content {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.admin-modal .actions {
+  border-top: 1px solid var(--divider);
+  background: #ffffff;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .admin-report-image {
@@ -797,5 +813,22 @@ details.faq + details.faq {
 
   #commerce-map {
     height: 240px;
+  }
+
+  .modal-backdrop {
+    padding: 0.6rem;
+  }
+
+  .admin-modal {
+    max-height: calc(100vh - 1.2rem);
+    border-radius: 14px;
+  }
+
+  .admin-report-image {
+    max-height: 220px;
+  }
+
+  .admin-modal .actions .button {
+    flex: 1 1 45%;
   }
 }

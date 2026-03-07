@@ -42,12 +42,15 @@ body::after {
   z-index: 0;
 }
 
-#root,
+#root {
+  position: relative;
+  z-index: 1;
+}
+
 .site-header,
 .page-main,
 footer {
   position: relative;
-  z-index: 1;
 }
 
 img {
