@@ -1,21 +1,22 @@
 {
-    "name":  "mappets-web-react",
-    "private":  true,
-    "version":  "1.0.0",
-    "type":  "module",
-    "scripts":  {
-                    "dev":  "vite",
-                    "build":  "vite build \u0026\u0026 node scripts/postbuild-pages-fallback.mjs",
-                    "preview":  "vite preview"
-                },
-    "dependencies":  {
-                         "leaflet":  "^1.9.4",
-                         "react":  "^18.3.1",
-                         "react-dom":  "^18.3.1"
-                     },
-    "devDependencies":  {
-                            "@vitejs/plugin-react":  "^4.5.0",
-                            "playwright":  "^1.58.2",
-                            "vite":  "^5.4.11"
-                        }
+    "name": "mappets-web-react",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build && node scripts/postbuild-pages-fallback.mjs",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "leaflet": "^1.9.4",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-image-crop": "^11.0.10"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.5.0",
+        "playwright": "^1.58.2",
+        "vite": "^5.4.11"
+    }
 }

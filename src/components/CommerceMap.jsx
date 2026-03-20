@@ -13,6 +13,7 @@ function CommerceMap({ lat, lng, onPointSelected }) {
   const [mapReady, setMapReady] = useState(true);
   const [status, setStatus] = useState("Aun no seleccionaste ubicacion en el mapa.");
   const [locating, setLocating] = useState(false);
+  const hasSelection = parseCoord(lat) !== null && parseCoord(lng) !== null;
 
   useEffect(() => {
     onPointSelectedRef.current = onPointSelected;
@@ -141,12 +142,19 @@ function CommerceMap({ lat, lng, onPointSelected }) {
   };
 
   return (
-    <section className="map-block" aria-labelledby="map-title">
-      <h3 id="map-title">Ubicacion en mapa</h3>
-      <p className="muted">
-        Toca o haz clic en el punto exacto de tu comercio para cargar latitud y longitud
-        automaticamente.
-      </p>
+    <section className={`map-block ${hasSelection ? "map-block--selected" : ""}`} aria-labelledby="map-title">
+      <div className="map-block-head">
+        <div>
+          <h3 id="map-title">Ubicacion en mapa</h3>
+          <p className="muted">
+            Toca o haz clic en el punto exacto de tu comercio para cargar latitud y longitud
+            automaticamente.
+          </p>
+        </div>
+        <span className={`map-state-badge ${hasSelection ? "selected" : "pending"}`}>
+          {hasSelection ? "Ubicacion lista" : "Falta seleccionar"}
+        </span>
+      </div>
       {mapReady && (
         <div
           id="commerce-map"

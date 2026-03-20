@@ -13,6 +13,7 @@ import AccountPage from "./pages/AccountPage";
 import AdminReportsPage from "./pages/AdminReportsPage";
 import AdminCommercesPage from "./pages/AdminCommercesPage";
 import AdminSheltersPage from "./pages/AdminSheltersPage";
+import AdminSurveysPage from "./pages/AdminSurveysPage";
 import {
   fetchProfile,
   getStoredToken,
@@ -100,8 +101,14 @@ const routeConfig = {
   "/admin/comercios": {
     key: "admin-comercios",
     title: "Mappets | Panel de comercios",
-    description: "Panel administrativo para crear y gestionar comercios aliados.",
+    description: "Panel administrativo para revisar y moderar solicitudes de comercios aliados.",
     component: AdminCommercesPage
+  },
+  "/admin/encuestas": {
+    key: "admin-encuestas",
+    title: "Mappets | Panel de encuestas",
+    description: "Panel administrativo para revisar encuestas de cierre de publicaciones.",
+    component: AdminSurveysPage
   },
   "/admin/refugios": {
     key: "admin-refugios",

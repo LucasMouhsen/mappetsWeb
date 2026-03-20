@@ -33,11 +33,11 @@ async function request(path, token, options = {}) {
   return data;
 }
 
-function asArray(payload) {
+function asArray(payload, key = "requests") {
   if (Array.isArray(payload)) return payload;
   if (!payload || typeof payload !== "object") return [];
+  if (Array.isArray(payload[key])) return payload[key];
   if (Array.isArray(payload.data)) return payload.data;
-  if (Array.isArray(payload.commerces)) return payload.commerces;
   return [];
 }
 
@@ -53,26 +53,27 @@ export function denormalizePhoneFrom54(value) {
   return digits.startsWith("54") ? digits.slice(2) : digits;
 }
 
-export async function fetchAdminCommerces(token) {
-  const payload = await request("/api/commerce", token);
+export async function fetchCommerceTypes() {
+  const payload = await request("/api/commerce/types");
   return asArray(payload);
 }
 
-export async function fetchAdminCommerceById(token, commerceId) {
-  if (!commerceId) throw new Error("commerceId es obligatorio.");
-  return request(`/api/commerce/${commerceId}`, token);
-}
-
-export async function fetchCommerceTypes(token) {
-  const payload = await request("/api/commerce/types", token);
-  return asArray(payload);
-}
-
-export async function createAdminCommerce(token, formData) {
-  return request("/admin/commerce", token, {
+export async function createCommerceRequest(formData) {
+  return request("/api/commerce/requests", null, {
     method: "POST",
     body: formData
   });
+}
+
+export async function fetchAdminCommerceRequests(token, status = "PENDING") {
+  const statusQuery = status ? `?status=${encodeURIComponent(status)}` : "";
+  const payload = await request(`/api/admin/commerce/requests${statusQuery}`, token);
+  return asArray(payload);
+}
+
+export async function fetchAdminCommerceRequestById(token, commerceId) {
+  if (!commerceId) throw new Error("commerceId es obligatorio.");
+  return request(`/api/admin/commerce/requests/${commerceId}`, token);
 }
 
 export async function updateAdminCommerce(token, commerceId, formData) {
@@ -82,10 +83,25 @@ export async function updateAdminCommerce(token, commerceId, formData) {
   });
 }
 
-export async function deleteAdminCommerce(token, commerceId) {
-  return request(`/admin/commerce/${commerceId}`, token, {
-    method: "DELETE"
+async function updateCommerceRequestStatus(token, commerceId, action, notes = "") {
+  if (!commerceId) throw new Error("commerceId es obligatorio.");
+  return request(`/api/admin/commerce/requests/${commerceId}/${action}`, token, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ notes: String(notes || "").trim() || null })
   });
+}
+
+export async function approveAdminCommerceRequest(token, commerceId, notes = "") {
+  return updateCommerceRequestStatus(token, commerceId, "approve", notes);
+}
+
+export async function rejectAdminCommerceRequest(token, commerceId, notes = "") {
+  return updateCommerceRequestStatus(token, commerceId, "reject", notes);
+}
+
+export async function suspendAdminCommerceRequest(token, commerceId, notes = "") {
+  return updateCommerceRequestStatus(token, commerceId, "suspend", notes);
 }
 
 export function resolveAdminCommerceImageUrl(imagePath) {
