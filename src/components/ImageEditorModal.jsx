@@ -30,17 +30,6 @@ function buildCenteredCrop(mediaWidth, mediaHeight, aspectRatio) {
   };
 }
 
-function percentToPixelCrop(percentCrop, mediaWidth, mediaHeight) {
-  if (!percentCrop) return undefined;
-
-  return {
-    x: Math.round((percentCrop.x / 100) * mediaWidth),
-    y: Math.round((percentCrop.y / 100) * mediaHeight),
-    width: Math.round((percentCrop.width / 100) * mediaWidth),
-    height: Math.round((percentCrop.height / 100) * mediaHeight)
-  };
-}
-
 function aspectLabel(aspectRatio) {
   if (!aspectRatio) return "Libre";
   if (Math.abs(aspectRatio - 1) < 0.01) return "1:1";
@@ -92,7 +81,7 @@ function ImageEditorModal({ editor, onCancel, onSave }) {
     const { width, height } = event.currentTarget;
     const nextCrop = buildCenteredCrop(width, height, editor.aspectRatio);
     setCrop(nextCrop);
-    setCompletedCrop(percentToPixelCrop(nextCrop, width, height));
+    setCompletedCrop(nextCrop);
   };
 
   const handleSave = async () => {
@@ -131,7 +120,7 @@ function ImageEditorModal({ editor, onCancel, onSave }) {
             <ReactCrop
               crop={crop}
               onChange={(_, percentCrop) => setCrop(percentCrop)}
-              onComplete={(pixelCrop) => setCompletedCrop(pixelCrop)}
+              onComplete={(_, percentCrop) => setCompletedCrop(percentCrop)}
               aspect={editor.aspectRatio}
               keepSelection
               ruleOfThirds
