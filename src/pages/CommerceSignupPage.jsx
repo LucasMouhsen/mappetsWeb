@@ -14,6 +14,7 @@ import {
 } from "../utils/commerceHours";
 import {
   createImageEditorSession,
+  optimizeImageFile,
   renderCroppedImage,
   revokeImageEditorSession
 } from "../utils/imageCrop";
@@ -34,9 +35,9 @@ const FIELD_HELPERS = {
   openingHours: "Marca los dias abiertos y los rangos horarios tal como se publicaran.",
   latitude: "Se completa desde el mapa.",
   longitude: "Se completa desde el mapa.",
-  logo: "Formato 1:1 obligatorio. Abre el editor para encuadrarlo bien antes de enviarlo.",
-  banner: "Formato horizontal 2:1. Piensa esta imagen como portada del comercio.",
-  photos: "Sube al menos una foto real del local, productos o servicios. Puedes acomodarlas una por una."
+  logo: "Formato 1:1 obligatorio. Lo optimizamos antes del envio para evitar rechazos por tamano.",
+  banner: "Formato horizontal 2:1. Lo comprimimos antes de subirlo, pero conviene usar una foto clara.",
+  photos: "Sube al menos una foto real del local, productos o servicios. Las optimizamos antes de enviarlas."
 };
 
 const REQUIRED_FIELDS = [
@@ -103,6 +104,31 @@ const HERO_CHECKLIST = [
   "Horarios y ubicacion visibles para clientes",
   "Imagenes listas para moderacion"
 ];
+
+const MAX_MEDIA_TOTAL_BYTES = 900 * 1024;
+
+const MEDIA_PRESETS = {
+  logo: {
+    maxWidth: 800,
+    maxHeight: 800,
+    maxBytes: 180 * 1024,
+    quality: 0.88
+  },
+  banner: {
+    maxWidth: 1280,
+    maxHeight: 640,
+    maxBytes: 220 * 1024,
+    quality: 0.82,
+    outputType: "image/jpeg"
+  },
+  photos: {
+    maxWidth: 1280,
+    maxHeight: 1280,
+    maxBytes: 240 * 1024,
+    quality: 0.8,
+    outputType: "image/jpeg"
+  }
+};
 
 const initialState = {
   name: "",
@@ -173,6 +199,14 @@ function hasAnyOpeningHours(openingHoursPayload) {
   return Object.values(openingHoursPayload).some(Boolean);
 }
 
+function formatBytes(value) {
+  if (!Number.isFinite(value) || value <= 0) return "0 KB";
+  if (value >= 1024 * 1024) {
+    return `${(value / (1024 * 1024)).toFixed(1)} MB`;
+  }
+  return `${Math.max(1, Math.round(value / 1024))} KB`;
+}
+
 function CommerceSignupPage() {
   const [form, setForm] = useState(initialState);
   const [openingHours, setOpeningHours] = useState(defaultOpeningHours());
@@ -180,6 +214,7 @@ function CommerceSignupPage() {
   const [feedback, setFeedback] = useState("");
   const [isError, setIsError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [isOptimizingMedia, setIsOptimizingMedia] = useState(false);
   const [loadingTypes, setLoadingTypes] = useState(true);
   const [touched, setTouched] = useState({});
   const [imageEditor, setImageEditor] = useState(null);
@@ -188,6 +223,10 @@ function CommerceSignupPage() {
   const bannerPreview = useMemo(() => buildPreview(form.banner), [form.banner]);
   const photosPreview = useMemo(() => buildPreviewList(form.photos), [form.photos]);
   const openingHoursPayload = useMemo(() => openingHoursToPayload(openingHours), [openingHours]);
+  const mediaBytes = useMemo(
+    () => [form.logo, form.banner, ...form.photos].reduce((total, file) => total + (file?.size || 0), 0),
+    [form.banner, form.logo, form.photos]
+  );
   const fieldErrors = useMemo(() => {
     const errors = {};
 
@@ -247,9 +286,12 @@ function CommerceSignupPage() {
     if (!form.photos.length) {
       errors.photos = "Adjunta al menos una foto del comercio.";
     }
+    if (mediaBytes > MAX_MEDIA_TOTAL_BYTES) {
+      errors.photos = `Las imagenes pesan ${formatBytes(mediaBytes)} y el limite actual es ${formatBytes(MAX_MEDIA_TOTAL_BYTES)}. Deja menos fotos o vuelve a recortarlas.`;
+    }
 
     return errors;
-  }, [form, openingHoursPayload]);
+  }, [form, mediaBytes, openingHoursPayload]);
   const completedRequiredCount = useMemo(
     () => REQUIRED_FIELDS.filter((fieldName) => !fieldErrors[fieldName]).length,
     [fieldErrors]
@@ -326,26 +368,46 @@ function CommerceSignupPage() {
     }));
   };
 
+  const optimizeSelectedFile = useCallback(async (file, fieldName) => {
+    const optimized = await optimizeImageFile(file, MEDIA_PRESETS[fieldName] || {});
+    return withPreviewKey(optimized);
+  }, []);
+
   const onFileChange = async (event) => {
-    const { name, files } = event.target;
+    const input = event.target;
+    const { name, files } = input;
     setTouched((prev) => ({ ...prev, [name]: true }));
-    if (name === "photos") {
-      const nextPhotos = Array.from(files || []).map(withPreviewKey);
+    setFeedback("");
+    setIsError(false);
+    setIsOptimizingMedia(true);
+
+    try {
+      if (name === "photos") {
+        const nextPhotos = await Promise.all(
+          Array.from(files || []).map((file) => optimizeSelectedFile(file, "photos"))
+        );
+        setForm((prev) => ({
+          ...prev,
+          photos: nextPhotos
+        }));
+        return;
+      }
+
+      const nextFile = files?.[0] ? await optimizeSelectedFile(files[0], name) : null;
       setForm((prev) => ({
         ...prev,
-        photos: nextPhotos
+        [name]: nextFile
       }));
-      return;
-    }
 
-    const nextFile = files?.[0] ? withPreviewKey(files[0]) : null;
-    setForm((prev) => ({
-      ...prev,
-      [name]: nextFile
-    }));
-
-    if (nextFile && (name === "logo" || name === "banner")) {
-      await openImageEditor({ fieldName: name, file: nextFile });
+      if (nextFile && (name === "logo" || name === "banner")) {
+        await openImageEditor({ fieldName: name, file: nextFile });
+      }
+    } catch (error) {
+      setFeedback(error.message || "No pudimos preparar las imagenes para el envio.");
+      setIsError(true);
+    } finally {
+      setIsOptimizingMedia(false);
+      input.value = "";
     }
   };
 
@@ -410,7 +472,10 @@ function CommerceSignupPage() {
           objectUrl: imageEditor.objectUrl,
           crop: completedCrop,
           outputWidth: imageEditor.outputWidth,
-          outputHeight: imageEditor.outputHeight
+          outputHeight: imageEditor.outputHeight,
+          outputType: MEDIA_PRESETS[imageEditor.fieldName]?.outputType,
+          quality: MEDIA_PRESETS[imageEditor.fieldName]?.quality,
+          maxBytes: MEDIA_PRESETS[imageEditor.fieldName]?.maxBytes
         })
       );
 
@@ -557,6 +622,12 @@ function CommerceSignupPage() {
     event.preventDefault();
     setFeedback("");
     setIsError(false);
+
+    if (isOptimizingMedia) {
+      setFeedback("Espera a que terminemos de preparar las imagenes antes de enviar.");
+      setIsError(true);
+      return;
+    }
 
     if (validationMessage) {
       markAllTouched();
@@ -1106,12 +1177,16 @@ function CommerceSignupPage() {
                 {sectionStatus.media.badge}
               </span>
             </div>
-            <div className="media-guidance">
+          <div className="media-guidance">
               <strong>Recomendacion visual</strong>
               <p>
                 Usa imagenes bien iluminadas, sin texto incrustado ni marcas de agua. El logo se
                 ve mejor centrado y el banner funciona mejor con una foto horizontal del local o
                 de los servicios.
+              </p>
+              <p className="muted admin-media-caption">
+                Peso actual optimizado: {formatBytes(mediaBytes)} de {formatBytes(MAX_MEDIA_TOTAL_BYTES)}.
+                {" "}Si superas ese limite, reduce la cantidad de fotos o vuelve a recortarlas.
               </p>
             </div>
           <div className="row">
@@ -1122,6 +1197,7 @@ function CommerceSignupPage() {
                 name="logo"
                 type="file"
                 accept="image/*"
+                disabled={submitting || isOptimizingMedia}
                 onChange={onFileChange}
                 onBlur={() => setTouched((prev) => ({ ...prev, logo: true }))}
                 aria-invalid={fieldErrors.logo ? "true" : "false"}
@@ -1144,6 +1220,7 @@ function CommerceSignupPage() {
                 name="banner"
                 type="file"
                 accept="image/*"
+                disabled={submitting || isOptimizingMedia}
                 onChange={onFileChange}
                 onBlur={() => setTouched((prev) => ({ ...prev, banner: true }))}
                 aria-invalid={fieldErrors.banner ? "true" : "false"}
@@ -1169,6 +1246,7 @@ function CommerceSignupPage() {
               type="file"
               accept="image/*"
               multiple
+              disabled={submitting || isOptimizingMedia}
               onChange={onFileChange}
               onBlur={() => setTouched((prev) => ({ ...prev, photos: true }))}
               aria-invalid={fieldErrors.photos ? "true" : "false"}
@@ -1219,14 +1297,14 @@ function CommerceSignupPage() {
           </section>
 
           <div className="form-submit-panel">
-            <div className="form-submit-copy">
+          <div className="form-submit-copy">
               <strong>Revision manual de Mappets</strong>
               <p>
                 Al enviar, el comercio queda pendiente de validacion. No se publica automaticamente.
               </p>
             </div>
-            <button className="button form-submit-button" type="submit" disabled={submitting || loadingTypes}>
-              {submitting ? "Enviando..." : "Enviar solicitud de alta"}
+            <button className="button form-submit-button" type="submit" disabled={submitting || loadingTypes || isOptimizingMedia}>
+              {isOptimizingMedia ? "Preparando imagenes..." : submitting ? "Enviando..." : "Enviar solicitud de alta"}
             </button>
           </div>
           <p className={`feedback ${isError ? "error" : ""}`} role="status" aria-live="polite">

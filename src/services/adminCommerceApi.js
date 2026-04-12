@@ -59,10 +59,19 @@ export async function fetchCommerceTypes() {
 }
 
 export async function createCommerceRequest(formData) {
-  return request("/api/commerce/requests", null, {
-    method: "POST",
-    body: formData
-  });
+  try {
+    return await request("/api/commerce/requests", null, {
+      method: "POST",
+      body: formData
+    });
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error(
+        "No pudimos subir las imagenes. Reduce el peso total de logo, banner y fotos e intenta nuevamente."
+      );
+    }
+    throw error;
+  }
 }
 
 export async function fetchAdminCommerceRequests(token, status = "PENDING") {

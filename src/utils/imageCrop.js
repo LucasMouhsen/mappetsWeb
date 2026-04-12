@@ -11,6 +11,131 @@ function clampCropValue(value, max) {
   return Math.min(Math.max(0, value), Math.max(0, max));
 }
 
+function buildCanvas({ image, exportWidth, exportHeight, sourceCrop = null, backgroundColor = null }) {
+  const canvas = document.createElement("canvas");
+  canvas.width = exportWidth;
+  canvas.height = exportHeight;
+
+  const context = canvas.getContext("2d");
+  if (!context) {
+    throw new Error("No se pudo inicializar el editor de imagen.");
+  }
+
+  if (backgroundColor) {
+    context.fillStyle = backgroundColor;
+    context.fillRect(0, 0, exportWidth, exportHeight);
+  }
+
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = "high";
+
+  if (sourceCrop) {
+    context.drawImage(
+      image,
+      sourceCrop.x,
+      sourceCrop.y,
+      sourceCrop.width,
+      sourceCrop.height,
+      0,
+      0,
+      exportWidth,
+      exportHeight
+    );
+    return canvas;
+  }
+
+  context.drawImage(image, 0, 0, exportWidth, exportHeight);
+  return canvas;
+}
+
+function canvasToBlob(canvas, type, quality) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((result) => {
+      if (!result) {
+        reject(new Error("No se pudo exportar la imagen editada."));
+        return;
+      }
+      resolve(result);
+    }, type, quality);
+  });
+}
+
+function getFileExtension(file, fallback = ".jpg") {
+  return file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".")) : fallback;
+}
+
+function getFileBaseName(file) {
+  return file.name.includes(".") ? file.name.slice(0, file.name.lastIndexOf(".")) : file.name;
+}
+
+function getExtensionForType(type, fallbackExtension = ".jpg") {
+  switch (type) {
+    case "image/jpeg":
+      return ".jpg";
+    case "image/png":
+      return ".png";
+    case "image/webp":
+      return ".webp";
+    default:
+      return fallbackExtension;
+  }
+}
+
+async function exportCanvasAsFile({
+  canvas,
+  file,
+  outputType,
+  quality = 0.9,
+  minQuality = 0.6,
+  maxBytes,
+  suffix = "optimized"
+}) {
+  let exportType = outputType || file.type || "image/jpeg";
+  let currentQuality = quality;
+  let backgroundColor = exportType === "image/jpeg" ? "#ffffff" : null;
+  let workingCanvas = canvas;
+
+  if (backgroundColor) {
+    workingCanvas = buildCanvas({
+      image: canvas,
+      exportWidth: canvas.width,
+      exportHeight: canvas.height,
+      backgroundColor
+    });
+  }
+
+  let blob = await canvasToBlob(workingCanvas, exportType, currentQuality);
+
+  if (maxBytes && blob.size > maxBytes && exportType === "image/png") {
+    exportType = "image/jpeg";
+    currentQuality = Math.min(0.82, quality);
+    backgroundColor = "#ffffff";
+    workingCanvas = buildCanvas({
+      image: canvas,
+      exportWidth: canvas.width,
+      exportHeight: canvas.height,
+      backgroundColor
+    });
+    blob = await canvasToBlob(workingCanvas, exportType, currentQuality);
+  }
+
+  while (maxBytes && blob.size > maxBytes && exportType !== "image/png" && currentQuality > minQuality) {
+    const nextQuality = Math.max(minQuality, Number((currentQuality - 0.08).toFixed(2)));
+    if (nextQuality === currentQuality) break;
+    currentQuality = nextQuality;
+    blob = await canvasToBlob(workingCanvas, exportType, currentQuality);
+  }
+
+  const fallbackExtension = getFileExtension(file);
+  const extension = getExtensionForType(blob.type || exportType, fallbackExtension);
+  const baseName = getFileBaseName(file);
+
+  return new File([blob], `${baseName}-${suffix}${extension}`, {
+    type: blob.type || exportType,
+    lastModified: Date.now()
+  });
+}
+
 function resolveSourceCrop(crop, image) {
   const naturalWidth = image.naturalWidth || image.width;
   const naturalHeight = image.naturalHeight || image.height;
@@ -68,12 +193,57 @@ export function revokeImageEditorSession(session) {
   }
 }
 
+export async function optimizeImageFile(file, options = {}) {
+  const objectUrl = URL.createObjectURL(file);
+  try {
+    const image = await loadImage(objectUrl);
+    const naturalWidth = image.naturalWidth || image.width;
+    const naturalHeight = image.naturalHeight || image.height;
+    const widthRatio = options.maxWidth ? options.maxWidth / naturalWidth : 1;
+    const heightRatio = options.maxHeight ? options.maxHeight / naturalHeight : 1;
+    const scale = Math.min(1, widthRatio, heightRatio);
+    const exportWidth = Math.max(1, Math.round(naturalWidth * scale));
+    const exportHeight = Math.max(1, Math.round(naturalHeight * scale));
+    const canvas = buildCanvas({
+      image,
+      exportWidth,
+      exportHeight,
+      backgroundColor: options.outputType === "image/jpeg" ? "#ffffff" : null
+    });
+
+    const optimizedFile = await exportCanvasAsFile({
+      canvas,
+      file,
+      outputType: options.outputType,
+      quality: options.quality,
+      minQuality: options.minQuality,
+      maxBytes: options.maxBytes,
+      suffix: options.suffix || "optimized"
+    });
+
+    if (!options.maxBytes && optimizedFile.size >= file.size) {
+      return file;
+    }
+
+    if (options.maxBytes && file.size <= options.maxBytes && optimizedFile.size >= file.size) {
+      return file;
+    }
+
+    return optimizedFile;
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
 export async function renderCroppedImage({
   file,
   objectUrl,
   crop,
   outputWidth,
-  outputHeight
+  outputHeight,
+  outputType,
+  quality,
+  maxBytes
 }) {
   if (!crop?.width || !crop?.height) {
     throw new Error("Selecciona un area valida antes de guardar.");
@@ -99,44 +269,21 @@ export async function renderCroppedImage({
     ? Math.round(outputHeight)
     : Math.max(1, Math.round(sourceHeight));
 
-  const canvas = document.createElement("canvas");
-  canvas.width = exportWidth;
-  canvas.height = exportHeight;
-
-  const context = canvas.getContext("2d");
-  if (!context) {
-    throw new Error("No se pudo inicializar el editor de imagen.");
-  }
-
-  context.imageSmoothingEnabled = true;
-  context.imageSmoothingQuality = "high";
-  context.drawImage(
+  const canvas = buildCanvas({
     image,
-    sourceX,
-    sourceY,
-    sourceWidth,
-    sourceHeight,
-    0,
-    0,
     exportWidth,
-    exportHeight
-  );
-
-  const blob = await new Promise((resolve, reject) => {
-    canvas.toBlob((result) => {
-      if (!result) {
-        reject(new Error("No se pudo exportar la imagen editada."));
-        return;
-      }
-      resolve(result);
-    }, file.type || "image/jpeg", 0.92);
+    exportHeight,
+    sourceCrop,
+    backgroundColor: outputType === "image/jpeg" ? "#ffffff" : null
   });
 
-  const extension = file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".")) : ".jpg";
-  const baseName = file.name.includes(".") ? file.name.slice(0, file.name.lastIndexOf(".")) : file.name;
-
-  return new File([blob], `${baseName}-crop${extension}`, {
-    type: blob.type || file.type,
-    lastModified: Date.now()
+  return exportCanvasAsFile({
+    canvas,
+    file,
+    outputType,
+    quality: quality ?? 0.88,
+    minQuality: 0.58,
+    maxBytes,
+    suffix: "crop"
   });
 }
