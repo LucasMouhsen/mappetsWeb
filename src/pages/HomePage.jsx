@@ -1,7 +1,7 @@
 ﻿function HomePage() {
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--home">
         <p className="kicker">Comunidad para mascotas y familias</p>
         <h1>Encuentra, protege y conecta con quienes aman a los animales.</h1>
         <p className="intro">
@@ -70,7 +70,11 @@
         </article>
       </section>
 
-      <section id="donaciones" className="hero hero--donations" aria-labelledby="donaciones-titulo">
+      <section
+        id="donaciones"
+        className="hero hero--donations hero--compact"
+        aria-labelledby="donaciones-titulo"
+      >
         <p className="kicker">Apoyo a la comunidad</p>
         <h2 id="donaciones-titulo">Conocenos</h2>
         <p className="intro">Seguinos para conocernos y ayudarnos a seguir creciendo.</p>

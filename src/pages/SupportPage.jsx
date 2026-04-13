@@ -97,7 +97,7 @@ function SupportPage() {
 
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--compact">
         <small>Soporte de Mappets</small>
         <h1>Centro de ayuda y contacto</h1>
         <p>
@@ -161,7 +161,11 @@ function SupportPage() {
         </article>
       </section>
 
-      <section id="contacto" className="request-card" aria-labelledby="contacto-titulo">
+      <section
+        id="contacto"
+        className="request-card request-card--support"
+        aria-labelledby="contacto-titulo"
+      >
         <h2 id="contacto-titulo">Formulario de contacto</h2>
         <p>
           Completa el formulario para que podamos ayudarte. Guardamos tu informacion solo para

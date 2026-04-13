@@ -1,7 +1,7 @@
 ﻿function LegalNoticePage() {
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--compact">
         <small>Legales</small>
         <h1>Aviso Legal</h1>
         <p>
@@ -10,7 +10,7 @@
         </p>
       </section>
 
-      <section className="section" id="titular">
+      <section className="section section--legal" id="titular">
         <h2>Titular del servicio</h2>
         <p>
           Mappets es administrado por Lucas Diaz Mouhsen. Para comunicaciones formales, pedidos de
@@ -19,7 +19,7 @@
         </p>
       </section>
 
-      <section className="section" id="propiedad">
+      <section className="section section--legal" id="propiedad">
         <h2>Propiedad intelectual</h2>
         <p>
           El software, disenos, logotipos, contenidos y demas elementos de la plataforma estan
@@ -28,7 +28,7 @@
         </p>
       </section>
 
-      <section className="section" id="responsabilidad">
+      <section className="section section--legal" id="responsabilidad">
         <h2>Responsabilidad</h2>
         <p>
           El titular vela por la seguridad y disponibilidad del servicio, pero no es responsable por
@@ -38,7 +38,7 @@
         </p>
       </section>
 
-      <section className="section" id="reclamos">
+      <section className="section section--legal" id="reclamos">
         <h2>Reclamos y autoridades de control</h2>
         <p>
           Si consideras que se vulneraron tus derechos, puedes presentar un reclamo ante la Agencia
@@ -47,7 +47,7 @@
         </p>
       </section>
 
-      <section className="section" aria-labelledby="relacionados">
+      <section className="section section--legal" aria-labelledby="relacionados">
         <h2 id="relacionados">Documentos relacionados</h2>
         <div className="related">
           <a href="/terminos">Terminos y Condiciones</a>

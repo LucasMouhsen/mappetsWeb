@@ -8,13 +8,14 @@ html {
   scroll-behavior: smooth;
   color-scheme: only light;
   background-color: #fff7df;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   font-family: "Manrope", sans-serif;
   color: var(--ink);
-  line-height: 1.6;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
   background:
     radial-gradient(1200px 600px at 0% -10%, rgba(244, 190, 76, 0.45), transparent 60%),
@@ -24,6 +25,7 @@ body {
   min-height: 100vh;
   color-scheme: only light;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body::before {
@@ -32,7 +34,7 @@ body::before {
   inset: 0;
   background-image: radial-gradient(rgba(33, 37, 41, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
-  opacity: 0.2;
+  opacity: 0.14;
   pointer-events: none;
   z-index: 0;
 }
@@ -60,6 +62,11 @@ footer {
 img {
   max-width: 100%;
   display: block;
+}
+
+p,
+li {
+  text-wrap: pretty;
 }
 
 h1,
@@ -129,14 +136,16 @@ summary:focus-visible {
 .intro,
 .hero p {
   margin: 0;
-  color: var(--muted);
-  max-width: 700px;
-  font-size: 1.05rem;
+  color: var(--body-copy);
+  max-width: min(60ch, 100%);
+  font-size: clamp(1rem, 1.25vw, 1.08rem);
+  line-height: 1.68;
 }
 
 .muted {
   color: var(--muted);
   font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 @keyframes rise {

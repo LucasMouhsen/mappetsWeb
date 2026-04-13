@@ -1059,48 +1059,50 @@ function CommerceSignupPage() {
                           Dos turnos
                         </label>
                       </div>
-                      <div className="admin-hours-times" aria-label={`Horarios para ${day}`}>
-                        <label className="admin-time-field">
-                          <span>Abre</span>
-                          <input
-                            type="time"
-                            value={item.start}
-                            disabled={item.closed}
-                            onChange={(event) => onHoursChange(day, { start: event.target.value })}
-                          />
-                        </label>
-                        <label className="admin-time-field">
-                          <span>Cierra</span>
-                          <input
-                            type="time"
-                            value={item.end}
-                            disabled={item.closed}
-                            onChange={(event) => onHoursChange(day, { end: event.target.value })}
-                          />
-                        </label>
-                        {item.split ? (
-                          <>
-                            <label className="admin-time-field">
-                              <span>Reabre</span>
-                              <input
-                                type="time"
-                                value={item.start2}
-                                disabled={item.closed}
-                                onChange={(event) => onHoursChange(day, { start2: event.target.value })}
-                              />
-                            </label>
-                            <label className="admin-time-field">
-                              <span>Cierra</span>
-                              <input
-                                type="time"
-                                value={item.end2}
-                                disabled={item.closed}
-                                onChange={(event) => onHoursChange(day, { end2: event.target.value })}
-                              />
-                            </label>
-                          </>
-                        ) : null}
-                      </div>
+                      {!item.closed ? (
+                        <div className="admin-hours-times" aria-label={`Horarios para ${day}`}>
+                          <label className="admin-time-field">
+                            <span>Abre</span>
+                            <input
+                              type="time"
+                              value={item.start}
+                              disabled={item.closed}
+                              onChange={(event) => onHoursChange(day, { start: event.target.value })}
+                            />
+                          </label>
+                          <label className="admin-time-field">
+                            <span>Cierra</span>
+                            <input
+                              type="time"
+                              value={item.end}
+                              disabled={item.closed}
+                              onChange={(event) => onHoursChange(day, { end: event.target.value })}
+                            />
+                          </label>
+                          {item.split ? (
+                            <>
+                              <label className="admin-time-field">
+                                <span>Reabre</span>
+                                <input
+                                  type="time"
+                                  value={item.start2}
+                                  disabled={item.closed}
+                                  onChange={(event) => onHoursChange(day, { start2: event.target.value })}
+                                />
+                              </label>
+                              <label className="admin-time-field">
+                                <span>Cierra</span>
+                                <input
+                                  type="time"
+                                  value={item.end2}
+                                  disabled={item.closed}
+                                  onChange={(event) => onHoursChange(day, { end2: event.target.value })}
+                                />
+                              </label>
+                            </>
+                          ) : null}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 );

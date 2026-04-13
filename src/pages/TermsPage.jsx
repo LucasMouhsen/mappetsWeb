@@ -1,7 +1,7 @@
 ﻿function TermsPage() {
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--compact">
         <small>Legales</small>
         <h1>Terminos y Condiciones de Uso</h1>
         <p>
@@ -11,7 +11,7 @@
         </p>
       </section>
 
-      <section className="section" id="alcance">
+      <section className="section section--legal" id="alcance">
         <h2>1. Alcance del servicio</h2>
         <p>
           Mappets conecta a personas interesadas en el cuidado y la proteccion de animales mediante
@@ -21,7 +21,7 @@
         </p>
       </section>
 
-      <section className="section" id="registro">
+      <section className="section section--legal" id="registro">
         <h2>2. Registro y cuenta</h2>
         <ul>
           <li>Debes proporcionar datos veraces y mantenerlos actualizados.</li>
@@ -36,7 +36,7 @@
         </ul>
       </section>
 
-      <section className="section" id="contenido">
+      <section className="section section--legal" id="contenido">
         <h2>3. Contenido generado por personas usuarias</h2>
         <p>
           Garantizas que tienes derechos suficientes sobre textos e imagenes que compartas. No
@@ -45,7 +45,7 @@
         </p>
       </section>
 
-      <section className="section" id="uso-aceptable">
+      <section className="section section--legal" id="uso-aceptable">
         <h2>4. Uso aceptable</h2>
         <p>
           Esta prohibido emplear Mappets para actividades fraudulentas, enviar spam, distribuir
@@ -54,7 +54,7 @@
         </p>
       </section>
 
-      <section className="section" id="terceros">
+      <section className="section section--legal" id="terceros">
         <h2>5. Servicios y enlaces de terceros</h2>
         <p>
           Podemos ofrecer enlaces o integraciones con proveedores externos. Cada tercero define sus
@@ -63,7 +63,7 @@
         </p>
       </section>
 
-      <section className="section" id="propiedad-intelectual">
+      <section className="section section--legal" id="propiedad-intelectual">
         <h2>6. Propiedad intelectual</h2>
         <p>
           El software, disenos, logotipos y materiales propios de Mappets estan protegidos. Solo
@@ -71,7 +71,7 @@
         </p>
       </section>
 
-      <section className="section" id="responsabilidad">
+      <section className="section section--legal" id="responsabilidad">
         <h2>7. Limitacion de responsabilidad</h2>
         <p>
           Mappets es un intermediario que facilita la comunicacion entre personas. No garantizamos
@@ -81,7 +81,7 @@
         </p>
       </section>
 
-      <section className="section" id="suspension">
+      <section className="section section--legal" id="suspension">
         <h2>8. Suspension o cierre de cuentas</h2>
         <p>
           Podemos suspender o cancelar cuentas que infrinjan estos terminos, la ley o generen
@@ -90,7 +90,7 @@
         </p>
       </section>
 
-      <section className="section" aria-labelledby="relacionados">
+      <section className="section section--legal" aria-labelledby="relacionados">
         <h2 id="relacionados">Documentos relacionados</h2>
         <div className="related">
           <a href="/privacidad">Politica de Privacidad</a>

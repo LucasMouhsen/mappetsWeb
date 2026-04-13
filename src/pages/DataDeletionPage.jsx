@@ -64,7 +64,7 @@ function DataDeletionPage() {
 
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--compact">
         <small>Proteccion de datos</small>
         <h1>Solicita la eliminacion de tu informacion personal</h1>
         <p>
@@ -72,7 +72,7 @@ function DataDeletionPage() {
           eliminacion dentro de un plazo maximo de 30 dias.
         </p>
       </section>
-      <section className="request-card" aria-labelledby="solicitud-titulo">
+      <section className="request-card request-card--narrow" aria-labelledby="solicitud-titulo">
         <h2 id="solicitud-titulo">Formulario de solicitud</h2>
         <p>
           Al enviar este formulario generamos un mensaje para el equipo de soporte de Mappets con tu

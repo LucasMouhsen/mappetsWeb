@@ -1,7 +1,7 @@
 ﻿function PrivacyPage() {
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--compact">
         <small>Proteccion de datos</small>
         <h1>Politica de Privacidad</h1>
         <p>
@@ -12,7 +12,7 @@
         <p className="muted">Fecha de entrada en vigor: 15 de octubre de 2026.</p>
       </section>
 
-      <section className="section" id="datos" aria-labelledby="datos-titulo">
+      <section className="section section--legal" id="datos" aria-labelledby="datos-titulo">
         <h2 id="datos-titulo">Datos que recopilamos</h2>
         <ul>
           <li>
@@ -38,7 +38,7 @@
         </ul>
       </section>
 
-      <section className="section" id="uso" aria-labelledby="uso-titulo">
+      <section className="section section--legal" id="uso" aria-labelledby="uso-titulo">
         <h2 id="uso-titulo">Para que usamos los datos</h2>
         <ol>
           <li>Crear y mantener tu cuenta, responder consultas y personalizar la experiencia.</li>
@@ -54,7 +54,7 @@
         </ol>
       </section>
 
-      <section className="section" id="base-legal" aria-labelledby="base-titulo">
+      <section className="section section--legal" id="base-legal" aria-labelledby="base-titulo">
         <h2 id="base-titulo">Base legal y conservacion</h2>
         <p>
           Procesamos los datos con base en tu consentimiento informado, la ejecucion del contrato
@@ -71,7 +71,7 @@
         </ul>
       </section>
 
-      <section className="section" id="compartir" aria-labelledby="compartir-titulo">
+      <section className="section section--legal" id="compartir" aria-labelledby="compartir-titulo">
         <h2 id="compartir-titulo">Comparticion de datos</h2>
         <ul>
           <li>
@@ -90,7 +90,7 @@
         <p>No vendemos tus datos ni realizamos publicidad basada en perfiles.</p>
       </section>
 
-      <section className="section" id="derechos" aria-labelledby="derechos-titulo">
+      <section className="section section--legal" id="derechos" aria-labelledby="derechos-titulo">
         <h2 id="derechos-titulo">Tus derechos</h2>
         <p>
           Podes solicitar acceso, rectificacion, actualizacion, portabilidad, oposicion, limitacion
@@ -107,7 +107,7 @@
         </div>
       </section>
 
-      <section className="section" id="seguridad" aria-labelledby="seguridad-titulo">
+      <section className="section section--legal" id="seguridad" aria-labelledby="seguridad-titulo">
         <h2 id="seguridad-titulo">Seguridad y menores</h2>
         <p>
           Aplicamos controles tecnicos y organizativos, limitamos el acceso interno y revisamos
@@ -120,7 +120,7 @@
         </p>
       </section>
 
-      <section className="section" id="ubicacion" aria-labelledby="ubicacion-titulo">
+      <section className="section section--legal" id="ubicacion" aria-labelledby="ubicacion-titulo">
         <h2 id="ubicacion-titulo">Ubicacion en segundo plano (solo alertas cercanas)</h2>
         <p>
           Mappets utiliza la ubicacion en segundo plano unicamente para enviarte notificaciones
@@ -149,7 +149,7 @@
         </ul>
       </section>
 
-      <section className="section" aria-labelledby="relacionados">
+      <section className="section section--legal" aria-labelledby="relacionados">
         <h2 id="relacionados">Documentos relacionados</h2>
         <div className="related">
           <a href="/terminos">Terminos y Condiciones</a>
